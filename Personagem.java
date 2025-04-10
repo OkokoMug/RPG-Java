@@ -28,6 +28,8 @@ public class Personagem {
 			this.persuasao=10;
 			this.logica=5;
 			this.stealth=2;
+			System.out.println("\nVoce sempre soube que o melhor modo de lidar com alguém, é com palavras. " +
+								"\n Confiança. Manipulação. Assim foi sua vida neste mundo.");
 		}
 		if (n==2) {
 			this.espec="Inteligencia";
@@ -37,6 +39,8 @@ public class Personagem {
 			this.persuasao=5;
 			this.logica=10;
 			this.stealth=3;
+			System.out.println("\nNão há espaço para fé por essas bandas. Por conta disso, voce se prendeu ao pragmatismo."+
+								"\nA inteligência não está em saber tudo, mas em saber discernir o essencial em meio ao ruído do mundo.");
 		}
 		if (n==3) {
 			this.espec="Briga";
@@ -46,15 +50,19 @@ public class Personagem {
 			this.persuasao=3;
 			this.logica=2;
 			this.stealth=0;
+			System.out.println("\nNão há parceiros mais confiáveis do que seus próprios punhos. " + 
+								"\nA violencia nua e crua. A natureza da humanidade.");
 		}
 		if (n==4) {
-			this.espec="Investigação";
+			this.espec="Furtividade";
 			this.hp=5;
 			this.atk=1;
 			this.nivel=1;
 			this.persuasao=1;
 			this.logica=5;
 			this.stealth=10;
+			System.out.println("\nÉ preciso muito esforço e habilidade para esconder o próprio talento e competência. " +
+								"\nA arte de ser sutil abre muitas portas, incluindo aquelas que não estão a vista.");
 		}
 	}
 	
