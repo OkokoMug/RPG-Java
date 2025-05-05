@@ -43,7 +43,7 @@ public class Personagem {
 								"\nA inteligência não está em saber tudo, mas em saber discernir o essencial em meio ao ruído do mundo.");
 		}
 		if (n==3) {
-			this.espec="Briga";
+			this.espec="Atletismo";
 			this.hp=10;
 			this.atk=5;
 			this.nivel=1;
@@ -80,7 +80,8 @@ public class Personagem {
 		 if (n >=1 && n <=4) {
 	            espec(n);
 	        } else {
-	            System.out.println("Especialidade inválida.");
+	            System.out.println("Especialidade aleatoria atribuída.");
+	            espec();
 	        }
 	}
 	

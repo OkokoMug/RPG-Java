@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 //Crie os inimigos por aqui!!
 
 public class Inimigo extends Personagem{
@@ -23,7 +27,7 @@ public class Inimigo extends Personagem{
 	}
 	
 	public static Inimigo drone() {
-		return new Inimigo("Drone",8,4);
+		return new Inimigo("Drone",8,4); 
 	}
 	
 	public static Inimigo droneEspecial() {
@@ -34,5 +38,26 @@ public class Inimigo extends Personagem{
 		return new Inimigo("Segurança",20,8);
 	}
 	
+	public static Inimigo mendigo() {
+		return new Inimigo("Mendigo",2,1); 
+	}
+	
+	//lista de inimigos / Adiciona aqui para classe de combate depois em PLayer
+	public static  List<Inimigo> getInimigos(){
+		List<Inimigo> lista =new ArrayList<>();
+		lista.add(capanga());
+		lista.add(drone());
+		lista.add(droneEspecial());
+		lista.add(seguranca());
+		lista.add(mendigo());
+		return lista;
+	}
+	
+	//Pega inimigo da lista aleatoriamente
+	public static Inimigo inimigoRand() {
+		List<Inimigo> lista = getInimigos();
+		Random rand = new Random();
+		return lista.get(rand.nextInt(lista.size()));
+	}
 	
 }
