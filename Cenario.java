@@ -64,6 +64,7 @@ public class Cenario {
 	//"direção" , "Destino". Em pares, mais facil de extender o mapa depois
 	public static void initCenarios() {				//Descrição, opcoes//
 		
+		//Bilheteria
 		Map<String, String> opcoesBilheteria = new LinkedHashMap<>();
 		opcoesBilheteria.put("Voltar","Lobby");
 		opcoesBilheteria.put("Vasculhar", "#vasculhar_caixa");
@@ -75,6 +76,7 @@ public class Cenario {
 		
 		cenarios.put("Bilheteria", bilheteria);
 		
+		//Lobby
 		Map<String, String> opcoesLobby = new LinkedHashMap<>();
 		opcoesLobby.put("Bilheteria","Bilheteria");
 		opcoesLobby.put("Saida", "Ruas");
@@ -87,6 +89,7 @@ public class Cenario {
 		
 		cenarios.put("Lobby",lobby);
 				
+		//Sanitarios
 		Map<String, String> opcoesSanitarios = new LinkedHashMap<>();
 		opcoesSanitarios.put("Voltar","Lobby");
 		opcoesSanitarios.put("Espelho","#olha_espelho");
@@ -97,5 +100,38 @@ public class Cenario {
 				);
 		
 		cenarios.put("Sanitarios", sanitarios);
+		
+		//Ruas
+		Map<String, String> opcoesRuas = new LinkedHashMap<>();
+		opcoesRuas.put("Bar", "PubG");
+		opcoesRuas.put("Hotel", "Hotel");
+		opcoesRuas.put("Estacao", "Lobby");
+		
+		Cenario ruas = new Cenario(
+				"Você está nas Ruas", opcoesRuas, "RuasDialogo");
+		
+		cenarios.put("Ruas", ruas);
+		
+		//Hotel
+		Map<String, String> opcoesHotel = new LinkedHashMap<>();
+		opcoesHotel.put("Apartamento", "Apartamento");
+		opcoesHotel.put("Saida", "Ruas");
+		
+		Cenario hotel = new Cenario(
+				"Voce esta no seu Hotel.", opcoesHotel, "HotelDialogo");
+		
+		cenarios.put("Hotel",hotel);
+		
+		//Apartamento
+		Map<String, String> opcoesApartamento = new LinkedHashMap<>();
+		opcoesApartamento.put("Dormir", "#dormir_Apt");
+		opcoesApartamento.put("Banheiro","Lavabo");
+		opcoesApartamento.put("Voltar", "Hotel");
+		
+		Cenario apartamento = new Cenario(
+				"Voce esta em seu quarto de apartamento.", opcoesApartamento, "Intro_Apt");
+		
+		cenarios.put("Apartamento", apartamento);
+		
 	}
 }	

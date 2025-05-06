@@ -23,16 +23,19 @@ public class Principal {
 		
 		//Introdução
 		Dialogo.introCap1();
-		System.out.println("Digite seu novo nome: ");
+		Dialogo.dialogoIntro_cliente();
+		System.out.println("\nAnonimato faz parte do trabalho, você deveria inventar um nome.");
 		String nomeJogador = scanner.nextLine();
 		Player jogador = new Player(nomeJogador);	
-		System.out.println("Seu cognome durante a investigação será "+jogador.getNome());
-		
+		System.out.println("'Me chame de "+jogador.getNome() + ".'");
 		//Seleção de especialização
 		Dialogo.selectEspec();
 		int escolha = Integer.parseInt(scanner.nextLine());
 		jogador.setEspec(escolha);
 		jogador.playerStat();
+		
+		//Continuação dialogo cliente
+		Dialogo.dialogoIntro_clienteCt();
 		
 		//Intro chegada
 		Dialogo.introChegadaCidade();

@@ -5,6 +5,7 @@ public class Dialogo {
     private static boolean introCap1Mostrada = false;
     private static boolean introChegadaMostrada = false;
     private static boolean selectEspecMostrada = false;
+    private static boolean chegadaQuarto = false;
 	
 	//Dialogos historia
 	//Capitulo 1
@@ -27,9 +28,32 @@ public class Dialogo {
 				+ "\nÉ nesse cenário de sombras que você entra." 
 				+ "\nUm investigador ambiental renomado, conhecido por resolver casos que ninguém mais ousa tocar."
 				+ "\nContratado por alguém que se identifica apenas como O Cliente, sua missão é clara: " 
-				+ "\ndescobrir a origem da praga e expor os culpados — antes que a própria Cidade o engula também."
-				+ "\nEntretanto, para um trabalho difícil e misterioso como esse, voce precisara de um novo nome: ");}
+				+ "\ndescobrir a origem da praga e expor os culpados — antes que a própria Cidade o engula também.");}
 		
+	}
+	
+	//Dialogo cliente
+	
+	public static void dialogoIntro_cliente() {
+		System.out.println("\nVocê está descansando no trem, aproveitando os poucos momentos de descanso que você terá antes de chegar na Cidade. "
+				+ "\nAlguém liga para você, O Cliente. Você atende.");
+		System.out.println("'Consegue ver A Cidade? Um símbolo de revolução industrial e científica, é o que eles dizem, "
+				+ "\nmas não conseguem fazer um maldito trem que pare de balançar. Ainda falta algumas horas antes de você estar na capital.'");
+		System.out.println("'A cada novo amanhecer, um trem consome em silêncio cerca de uma tonelada de carvão, e em troca, "
+				+ "\nlibera na atmosfera mais de duas toneladas de dióxido de carbono — sem falar na fuligem e nos gases que sequer vemos, mas respiramos.'");
+		System.out.println("\nA fumaça densa e negra nos céus é visível à distância cobrindo a cidade, saindo das enormes fábricas que funcionam dia e noite, "
+				+ "\nalimentadas por carvão, petróleo e a esperança daquelas pobres almas que lá trabalham.");
+		System.out.println("\n'Eficiência máxima a custo de todo o resto.'"
+				+ "\n'A expectativa de vida não é muito alta, e para piorar uma doença desconhecida extremamente contagiosa e fatal está se espalhando. "
+				+ "\nSeu trabalho é descobrir a origem dela e se há um responsável.'");
+		System.out.println("'Me desculpe, mas como posso chamá-lo?'");
+	}
+	
+	public static void dialogoIntro_clienteCt() {
+		System.out.println("\nVocê descansa o resto da viagem de trem. Ao acordar com o trem freiando você finalmente se levanta e sai sem nenhum problema do seu vagão.");
+		System.out.println("O ar tóxico preenche seus pulmões e o faz tossir, você consegue sentir a fuligem no ar passando pela sua garganta e a fumaça queimando seus olhos.");
+		System.out.println("Você veste sua máscara de gás, um item essencial. A máscara cobre completamente a sua face e a protege dos resíduos no ar nos seus olhos, "
+				+ "\ne o único filtrador te protege do mesmos mas para seus inocentes pulmões. ");
 	}
 	
 	//Intro cidade
@@ -37,8 +61,7 @@ public class Dialogo {
 	public static void introChegadaCidade() {
 		if (!introChegadaMostrada) {
 			introChegadaMostrada = true;
-		System.out.println("\nSendo assim...");
-		System.out.println("\nA viagem até a Cidade não é longa, porém voce se sente exaurido.\n"+
+		System.out.println("\nA viagem até a Cidade não foi longa, porém voce se sente exaurido.\n"+
 						"Seja por conta das vibrações do trem, ou pela completa ausencia de qualquer verde pela janela...");}
 	}
 	
@@ -116,6 +139,27 @@ public class Dialogo {
 	public static void TremC_dialogoBanheiro() {
 		System.out.println("\nEntrando no banheiro da estação, voce é imediatamente atingido pelo odor fétido de lixo e dejetos."+
 				"\nParece que não limpar esse lugar a pelo menos um mes...");
+	}
+	
+	public static void Intro_Apt() {
+		if(!chegadaQuarto) {
+			chegadaQuarto = true;
+			System.out.println("Você finalmente chega no local aonde você vai ficar, um pequeno quarto de um apartamento barato.");
+		}else {
+			System.out.println("\nÉ um apartamento pequeno e simples, o suficiente para passar a semana.");
+		}
+	}
+	
+	public static void RuasDialogo() {
+		System.out.println("\nOs estreitos suburbios da Cidade estão agitados");
+	}
+	
+	public static void HotelDialogo() {
+		System.out.println("Texto");
+	}
+	
+	public static void dormir_Apt() {
+		System.out.println("Voce salvou");
 	}
 	
 	public static void vasculhar_caixa() {
