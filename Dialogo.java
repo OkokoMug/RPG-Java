@@ -1,11 +1,9 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Dialogo {
 	
-    private static boolean introCap1Mostrada = false;
-    private static boolean introChegadaMostrada = false;
-    private static boolean selectEspecMostrada = false;
-    private static boolean chegadaQuarto = false;
+	private static final Scanner scanner = new Scanner(System.in);
 	
 	//Dialogos historia
 	//Capitulo 1
@@ -13,9 +11,9 @@ public class Dialogo {
 	
 	public static void introCap1() {
 		
-		if (!introCap1Mostrada) {
+		if (!Estados.introCap1Mostrada) {
 	
-		introCap1Mostrada = true;
+		Estados.introCap1Mostrada = true;
 		System.out.println("O céu perdeu sua cor há muito tempo."+
 				"\nUm manto cinza cobre a Cidade, onde o som das máquinas nunca dorme."
 				+ "\nAs caldeiras fervem noite e dia, alimentadas por petróleo e vidas humanas."
@@ -56,11 +54,13 @@ public class Dialogo {
 				+ "\ne o único filtrador te protege do mesmos mas para seus inocentes pulmões. ");
 	}
 	
+	
+	
 	//Intro cidade
 	
 	public static void introChegadaCidade() {
-		if (!introChegadaMostrada) {
-			introChegadaMostrada = true;
+		if (!Estados.introChegadaMostrada) {
+			Estados.introChegadaMostrada = true;
 		System.out.println("\nA viagem até a Cidade não foi longa, porém voce se sente exaurido.\n"+
 						"Seja por conta das vibrações do trem, ou pela completa ausencia de qualquer verde pela janela...");}
 	}
@@ -68,9 +68,9 @@ public class Dialogo {
 	//Seleção de especialização
 	public static void selectEspec() {
 		
-		if (!selectEspecMostrada) {
+		if (!Estados.selectEspecMostrada) {
 			
-		selectEspecMostrada = true;
+		Estados.selectEspecMostrada = true;
 		System.out.println("\n"+
 				"Assim como os melhores ivestigadores não são perfeitos, voce também não é excelente em tudo."+
 				"\nIndique qual a sua especialidade...");
@@ -142,12 +142,71 @@ public class Dialogo {
 	}
 	
 	public static void Intro_Apt() {
-		if(!chegadaQuarto) {
-			chegadaQuarto = true;
-			System.out.println("Você finalmente chega no local aonde você vai ficar, um pequeno quarto de um apartamento barato.");
-		}else {
+		if(!Estados.chegadaQuarto) {
+			Estados.chegadaQuarto = true;
+			System.out.println("\nVocê finalmente chega no local aonde você vai ficar, um pequeno quarto de apartamento barato.");
+			System.out.println("Ao abrir a porta você ouve seu ranger, "
+					+ "\ne a primeira coisa visível é uma goteira no teto e um rato que foge ao perceber sua presença."
+					+ "\nPelo menos eles tem sinal e um filtrador de oxigênio para o quarto que está sujo, é claro.");
+			dialogoCliente_IntroHotel();
+		}else{
 			System.out.println("\nÉ um apartamento pequeno e simples, o suficiente para passar a semana.");
 		}
+	}
+	
+	public static void dialogoCliente_IntroHotel() {
+		System.out.println("\nVocê ouve seu telefone tocar e o atende, é O Cliente.");
+		System.out.println("\nO Cliente: " + Player.get().getNome()+", você finalmente chegou no seu apartamento? Gostaria de te entregar condições melhores, "
+				+ "\nmas esse foi o máximo que consegui achar para suas necessidades de sutileza. Tem gostado do local?");
+		System.out.println("Sinceramente...");
+		System.out.println("\n 1 -> Tirando a porta rangendo, o rato, a goteira, a sujeira, e o apartamento, me sinto como um rei.");
+		System.out.println("\n 2 -> Já estive em condições piores.");
+		System.out.println("\n 3 -> Para uma cliente que propôs tanto dinheiro, é meio decepcionante que este é o seu melhor.");
+		
+		String escolha = scanner.nextLine();
+	
+		switch(escolha) {
+		case "1":
+			System.out.println("\nO Cliente: pelo menos está com seu senso de humor em dia, detetive.");
+			break;
+		case "2":
+			System.out.println("\nO Cliente: pela sua longa carreira, só consigo imaginar as terríveis condições que você se encontrou.");
+			break;
+		case "3":
+			System.out.println("\nO Cliente: Sinto muito, detetive, mas esse é o máximo que consegui pelo seu próprio bem.");
+		default:
+			System.out.println("Selecione um dialogo valido...");
+		}
+		
+		System.out.println("\nVocê presta a atenção em sua voz, apesar do telefone mudar a voz de uma pessoa, isso está claramente adulterado. "
+				+ "\nQuem quer que seja não quer que você saiba quem ele ou ela é. "
+				+ "\nSer um detetive exige curiosidade, ou pelo menos você se convence disso. Por que ele esconde sua identidade?");
+		
+		System.out.println("\nÉ um indivíduo com dinheiro pela enorme quantia ofertada, talvez um aristocrata?"
+				+ " Esquema entre corporações? Investigar isso pode deixar o cliente… Chateado, mas só se ele descobrir.");
+		
+		System.out.println("\nO Cliente: você deve investigar 2 figuras proeminentes e influentes na cidade que há suspeita de serem os causadores da doença por intenção ou não.");
+		System.out.println("\nPrimeiro é Mark Alighieri, o dono do atual monopólio farmacêutico, os primeiros infectados pela doença começaram aqui então vale a pena investigar isso a fundo. "
+				+ "\nTudo começou numa fábrica de produtos altamente tóxicos, talvez seja algo acidental ou proposital? Criar o problema e venda a solução.");
+		System.out.println("\nSegundo é Hiroyuki Arasaka, o dono do atual monopólio dos androids a vapor, um carrasco se me permite dizer. "
+				+ "\nEle trata seus funcionários como se trata seus androides os colocando em situações extremas. Ele é o homem mais poderoso e influente ao lado de Mark, ele deve saber de alguma coisa."
+				+ "\nVocê é minha última esperança para saber sobre isso, detetive… Por favor, faça um bom trabalho.");
+		
+		System.out.println("\nVocê está mexendo com peixe grande aqui, afinal, dono de produtos químicos em massa e um chefe que maltrata seus funcionários."
+				+ "\nVocê começará com Mark e seus produtos químicos para ver aonde o mal se iniciou ou só foi finalmente visto após sua origem.");
+		
+		System.out.println("\nA tática escolhida será método Indireto e logo após o confronto, ou direto. "
+				+ "\nPrimeiro recolher informações sigilosa e as vezes comprometedoras antes de ir para a segunda etapa que é falar cara a cara com o investigado. "
+				+ "\nAmanhã a noite você começará a primeira etapa da investigação, até lá, que tal descansar um pouco?");
+		PassagemTempo_Hora();
+	}
+	
+	public static void PassagemTempo_Hora() {
+		for (int i = 1; i <= 20; i++) {
+			System.out.println("...");
+		}
+		
+		System.out.print("18:00 - SEGUNDA-FEIRA\n");
 	}
 	
 	public static void RuasDialogo() {

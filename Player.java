@@ -1,15 +1,22 @@
 import java.util.Scanner;
 
 public class Player extends Personagem {
+	private static Player instancia;
 	
 	public Player() {
 		this.nome="John Smith";
-		
+		instancia = this;
 	}
 	
 	public Player(String n) {
 		this.nome=n;
-		
+		instancia = this;
+	}
+	
+
+	
+	public static Player get() {
+		return instancia;
 	}
 	
 	public void playerStat() {
@@ -69,7 +76,7 @@ public class Player extends Personagem {
 			        case "carisma":
 			            System.out.println("Você tenta persuadir o inimigo...");
 			            if (Math.random() < 0.6) {
-			                System.out.println("Voce convence o inimigo a recuar. Ele se afasta cautelosamente...");
+			                System.out.println("Voce o convence de que voce não tem inimigos...");
 			                flagCombate = false;
 			            } else {
 			                System.out.println("Voce falha em convence-lo. O inimigo avança...");

@@ -52,7 +52,7 @@ public class Cenario {
 			}
 		}
 
-		System.out.println("Você decide:");
+		System.out.println("\nVocê decide:");
 		for (String direcao : opcoes.keySet()) {
 			System.out.println("- " + direcao);
 		}
