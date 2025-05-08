@@ -1,23 +1,56 @@
 import java.util.Scanner;
+import java.io.Serializable;
 
 public class Player extends Personagem {
+	private static final long serialVersionUID = 1L;
 	private static Player instancia;
-	
-	public Player() {
-		this.nome="John Smith";
-		instancia = this;
-	}
+	private String nome;
+    private String classe;
+    private String cenarioAtual; 
+    private int especializacao;
 	
 	public Player(String n) {
 		this.nome=n;
 		instancia = this;
 	}
 	
-
-	
 	public static Player get() {
 		return instancia;
 	}
+	
+	public int getMaxHp() {
+		return this.getHp();
+	}
+	
+	public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCenarioAtual() {
+        return cenarioAtual;
+    }
+
+    public void setCenarioAtual(String cenarioAtual) {
+        this.cenarioAtual = cenarioAtual;
+    }
+
+    public int getEspecializacao() {
+        return especializacao;
+    }
+
+    public void setEspecializacao(int especializacao) {
+        this.especializacao = especializacao;
+    }
+	
+	public static void criarInstancia(String nome) {
+        if (instancia == null) {
+            instancia = new Player(nome);
+        }
+    }
 	
 	public void playerStat() {
 		System.out.println("\nAqui estão suas estatísticas: "+
@@ -30,10 +63,6 @@ public class Player extends Personagem {
 							"\nLogica: "+this.getLogica()+
 							"\nDiscrição: "+this.getStealth());
 		
-	}
-	
-	public int getMaxHp() {
-		return this.getHp();
 	}
 	
 	public void combateCheck(Inimigo inimigo) {

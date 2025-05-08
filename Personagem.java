@@ -12,7 +12,6 @@ public class Personagem {
 	private int stealth;
 	
 	public Personagem() {
-		this.nome="Vazio";
 	}
 	
 	public Personagem(String n) {
@@ -87,6 +86,10 @@ public class Personagem {
 	
 	public String getNome() {
 		return this.nome;
+	}
+	
+	public void setNome(String n) {
+		this.nome = n;
 	}
 	
 	public int getAtk() {

@@ -21,30 +21,68 @@ public class Principal {
 		
 		Scanner scanner = new Scanner(System.in);
 		
-		//Introdução
+        if (GameSave.existeSave()) {
+            System.out.println("Há um progresso salvo. Deseja carregá-lo ou iniciar um novo?");
+            System.out.println("1 - Carregar progresso");
+            System.out.println("2 - Iniciar novo progresso. ([!]O progresso salvo será excluído[!])\n");
+
+            int escolha = Integer.parseInt(scanner.nextLine());
+            
+            if (escolha == 1) {
+                GameSave.carregarJogo();
+            } else if (escolha == 2) {
+            	// Apaga o save anterior e inicia um novo jogo
+            	GameSave.apagarSave();
+                System.out.println("Iniciando novo jogo...\n");
+                for (int i = 0; i <= 2; i++) {
+                	System.out.println("");
+                		}
+                
+                } else {
+                	System.out.println("Opção inválida. Iniciando novo jogo...");
+                	GameSave.apagarSave();
+                	for (int i = 0; i <= 2; i++) {
+                		System.out.println("");
+                			}
+                	}
+            
+        	}else {
+                	System.out.println("Nenhum jogo salvo encontrado. Iniciando novo jogo...\n");
+                	for (int i = 0; i <= 2; i++) {
+                		System.out.println("");
+                	}
+                }
+		
+		// Introdução
 		Dialogo.introCap1();
 		Dialogo.dialogoIntro_cliente();
+
 		System.out.println("\nAnonimato faz parte do trabalho, você deveria inventar um nome.");
-		String nomeJogador = scanner.nextLine();
-		Player jogador = new Player(nomeJogador);	
-		System.out.println("'Me chame de "+jogador.getNome() + ".'");
-		//Seleção de especialização
+		
+	    String nomeJogador = "";
+        while (nomeJogador.isEmpty()) {
+            nomeJogador = scanner.nextLine().trim(); 
+            if (nomeJogador.isEmpty()) {
+                System.out.println("Por favor, insira um nome válido.");
+            }
+        }
+
+		Player.criarInstancia(nomeJogador);
+
+		System.out.println("'Me chame de " + Player.get().getNome() + ".'");
+
 		Dialogo.selectEspec();
 		int escolha = Integer.parseInt(scanner.nextLine());
-		jogador.setEspec(escolha);
-		jogador.playerStat();
+		Player.get().setEspec(escolha);
+		Player.get().playerStat();
+
 		
-		//Continuação dialogo cliente
 		Dialogo.dialogoIntro_clienteCt();
-		
-		//Intro chegada
 		Dialogo.introChegadaCidade();
 		
-		//Inicializando o cenario
 		Cenario.initCenarios();
 		Cenario cenarioAtual = Cenario.cenarios.get("Lobby");
 		
-		//Loop de jogo/Exploração/ações
 		while (true){
 			cenarioAtual.mostrarCenario();
 			String direcao = scanner.nextLine().trim();

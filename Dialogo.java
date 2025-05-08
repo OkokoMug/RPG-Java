@@ -48,6 +48,7 @@ public class Dialogo {
 	}
 	
 	public static void dialogoIntro_clienteCt() {
+		System.out.println("\nO Cliente: 'Ótimo então, " + Player.get().getNome() + ", falarei com você mais tarde.'");
 		System.out.println("\nVocê descansa o resto da viagem de trem. Ao acordar com o trem freiando você finalmente se levanta e sai sem nenhum problema do seu vagão.");
 		System.out.println("O ar tóxico preenche seus pulmões e o faz tossir, você consegue sentir a fuligem no ar passando pela sua garganta e a fumaça queimando seus olhos.");
 		System.out.println("Você veste sua máscara de gás, um item essencial. A máscara cobre completamente a sua face e a protege dos resíduos no ar nos seus olhos, "
@@ -156,24 +157,24 @@ public class Dialogo {
 	
 	public static void dialogoCliente_IntroHotel() {
 		System.out.println("\nVocê ouve seu telefone tocar e o atende, é O Cliente.");
-		System.out.println("\nO Cliente: " + Player.get().getNome()+", você finalmente chegou no seu apartamento? Gostaria de te entregar condições melhores, "
-				+ "\nmas esse foi o máximo que consegui achar para suas necessidades de sutileza. Tem gostado do local?");
-		System.out.println("Sinceramente...");
-		System.out.println("\n 1 -> Tirando a porta rangendo, o rato, a goteira, a sujeira, e o apartamento, me sinto como um rei.");
-		System.out.println("\n 2 -> Já estive em condições piores.");
-		System.out.println("\n 3 -> Para uma cliente que propôs tanto dinheiro, é meio decepcionante que este é o seu melhor.");
+		System.out.println("\nO Cliente: '" + Player.get().getNome()+", você finalmente chegou no seu apartamento? Gostaria de te entregar condições melhores, "
+				+ "\nmas esse foi o máximo que consegui achar para suas necessidades de sutileza. Tem gostado do local?'");
+		System.out.println("\n'Sinceramente...'");
+		System.out.println("\n 1 -> 'Tirando a porta rangendo, o rato, a goteira, a sujeira, e o apartamento, me sinto como um rei.'");
+		System.out.println("\n 2 -> 'Já estive em condições piores.'");
+		System.out.println("\n 3 -> 'Para uma cliente que propôs tanto dinheiro, é meio decepcionante que este é o seu melhor.'");
 		
 		String escolha = scanner.nextLine();
 	
 		switch(escolha) {
 		case "1":
-			System.out.println("\nO Cliente: pelo menos está com seu senso de humor em dia, detetive.");
+			System.out.println("\nO Cliente: 'Pelo menos está com seu senso de humor em dia, detetive.'");
 			break;
 		case "2":
-			System.out.println("\nO Cliente: pela sua longa carreira, só consigo imaginar as terríveis condições que você se encontrou.");
+			System.out.println("\nO Cliente: 'Pela sua longa carreira, só consigo imaginar as terríveis condições que você se encontrou.'");
 			break;
 		case "3":
-			System.out.println("\nO Cliente: Sinto muito, detetive, mas esse é o máximo que consegui pelo seu próprio bem.");
+			System.out.println("\nO Cliente: 'Sinto muito, detetive, mas esse é o máximo que consegui pelo seu próprio bem.'");
 		default:
 			System.out.println("Selecione um dialogo valido...");
 		}
@@ -185,19 +186,19 @@ public class Dialogo {
 		System.out.println("\nÉ um indivíduo com dinheiro pela enorme quantia ofertada, talvez um aristocrata?"
 				+ " Esquema entre corporações? Investigar isso pode deixar o cliente… Chateado, mas só se ele descobrir.");
 		
-		System.out.println("\nO Cliente: você deve investigar 2 figuras proeminentes e influentes na cidade que há suspeita de serem os causadores da doença por intenção ou não.");
-		System.out.println("\nPrimeiro é Mark Alighieri, o dono do atual monopólio farmacêutico, os primeiros infectados pela doença começaram aqui então vale a pena investigar isso a fundo. "
-				+ "\nTudo começou numa fábrica de produtos altamente tóxicos, talvez seja algo acidental ou proposital? Criar o problema e venda a solução.");
-		System.out.println("\nSegundo é Hiroyuki Arasaka, o dono do atual monopólio dos androids a vapor, um carrasco se me permite dizer. "
+		System.out.println("\nO Cliente: 'Você deve investigar 2 figuras proeminentes e influentes na cidade que há suspeita de serem os causadores da doença por intenção ou não.'");
+		System.out.println("\n'Primeiro é Mark Alighieri, o dono do atual monopólio farmacêutico, os primeiros infectados pela doença começaram aqui então vale a pena investigar isso a fundo. "
+				+ "\nTudo começou numa fábrica de produtos altamente tóxicos, talvez seja algo acidental ou proposital? Criar o problema e venda a solução.'");
+		System.out.println("\n'Segundo é Hiroyuki Arasaka, o dono do atual monopólio dos androids a vapor, um carrasco se me permite dizer. "
 				+ "\nEle trata seus funcionários como se trata seus androides os colocando em situações extremas. Ele é o homem mais poderoso e influente ao lado de Mark, ele deve saber de alguma coisa."
-				+ "\nVocê é minha última esperança para saber sobre isso, detetive… Por favor, faça um bom trabalho.");
+				+ "\nVocê é minha última esperança para saber sobre isso, detetive… Por favor, faça um bom trabalho.'");
 		
-		System.out.println("\nVocê está mexendo com peixe grande aqui, afinal, dono de produtos químicos em massa e um chefe que maltrata seus funcionários."
-				+ "\nVocê começará com Mark e seus produtos químicos para ver aonde o mal se iniciou ou só foi finalmente visto após sua origem.");
+		System.out.println("\n'Você está mexendo com peixe grande aqui, afinal, dono de produtos químicos em massa e um chefe que maltrata seus funcionários."
+				+ "\nVocê começará com Mark e seus produtos químicos para ver aonde o mal se iniciou ou só foi finalmente visto após sua origem.'");
 		
-		System.out.println("\nA tática escolhida será método Indireto e logo após o confronto, ou direto. "
-				+ "\nPrimeiro recolher informações sigilosa e as vezes comprometedoras antes de ir para a segunda etapa que é falar cara a cara com o investigado. "
-				+ "\nAmanhã a noite você começará a primeira etapa da investigação, até lá, que tal descansar um pouco?");
+		System.out.println("\n'A tática escolhida será método Indireto e logo após o confrontamos, ou direto. '"
+				+ "\n'Primeiro recolher informações sigilosa e as vezes comprometedoras antes de ir para a segunda etapa que é falar cara a cara com o investigado. "
+				+ "\nAmanhã a noite você começará a primeira etapa da investigação, até lá, que tal descansar um pouco?'");
 		PassagemTempo_Hora();
 	}
 	
@@ -210,7 +211,7 @@ public class Dialogo {
 	}
 	
 	public static void RuasDialogo() {
-		System.out.println("\nOs estreitos suburbios da Cidade estão agitados");
+		System.out.println("Os estreitos suburbios da Cidade estão agitados");
 	}
 	
 	public static void HotelDialogo() {
@@ -218,7 +219,8 @@ public class Dialogo {
 	}
 	
 	public static void dormir_Apt() {
-		System.out.println("Voce salvou");
+		System.out.println("Voce dorme por algumas horas...");
+		GameSave.salvarJogo();
 	}
 	
 	public static void vasculhar_caixa() {
