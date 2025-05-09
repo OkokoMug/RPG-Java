@@ -125,7 +125,7 @@ public class Cenario {
 		//Apartamento
 		Map<String, String> opcoesApartamento = new LinkedHashMap<>();
 		opcoesApartamento.put("Dormir", "#dormir_Apt");
-		opcoesApartamento.put("Banheiro","Lavabo");
+		opcoesApartamento.put("Relembre", "#carregarJogo");
 		opcoesApartamento.put("Voltar", "Hotel");
 		
 		Cenario apartamento = new Cenario(

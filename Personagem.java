@@ -1,6 +1,9 @@
+import java.io.Serializable;
 import java.util.Random;
+import java.io.Serializable;
 
-public class Personagem {
+public class Personagem implements Serializable {
+	private static final long serialVersionUID = 2L;
 	
 	protected String nome;
 	private String espec;

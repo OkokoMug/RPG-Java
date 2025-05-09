@@ -6,87 +6,40 @@ public class Principal {
 
 	public static void main(String[] args) {
 	
-		/*
-		Inimigo inimigo1= Inimigo.capanga();
-		inimigo1.mostraInimigo();
-		
-		Inimigo inimigo2= Inimigo.drone();
-		inimigo2.mostraInimigo();*/
-		
-	//	Inimigo inimigo3= Inimigo.seguranca();
-		//inimigo3.mostraInimigo();
-		
-		//Teste inimigo com dialogos direto da classe
-		//Dialogo.combate(inimigo3.getNome());
-		
 		Scanner scanner = new Scanner(System.in);
-		
-        if (GameSave.existeSave()) {
-            System.out.println("Há um progresso salvo. Deseja carregá-lo ou iniciar um novo?");
-            System.out.println("1 - Carregar progresso");
-            System.out.println("2 - Iniciar novo progresso. ([!]O progresso salvo será excluído[!])\n");
+	    
+	    if (GameSave.existeSave()) {
+	        System.out.println("1 - Carregar progresso");
+	        System.out.println("2 - Iniciar novo progresso. ([!]O progresso salvo será excluído[!])");
+	        System.out.print("\nEscolha: ");
+	        
+	        int escolha = Utils.lerInteiro(scanner, 1, 2, "");
+	        
+	        if (escolha == 1) {
+	            GameSave.carregarJogo();
+	            Cenario.initCenarios();
+	            
+	            // Start directly in apartment
+	            Cenario cenarioAtual = Cenario.cenarios.get("Apartamento");
+	            gameLoop(cenarioAtual, scanner);
+	            return;
+	        } else {
+	            GameSave.apagarSave();
+	        }
+	    }
+	    
+	    // Run normal intro for new game
+	    runNewGameIntro(scanner);
+	}
 
-            int escolha = Integer.parseInt(scanner.nextLine());
-            
-            if (escolha == 1) {
-                GameSave.carregarJogo();
-            } else if (escolha == 2) {
-            	// Apaga o save anterior e inicia um novo jogo
-            	GameSave.apagarSave();
-                System.out.println("Iniciando novo jogo...\n");
-                for (int i = 0; i <= 2; i++) {
-                	System.out.println("");
-                		}
-                
-                } else {
-                	System.out.println("Opção inválida. Iniciando novo jogo...");
-                	GameSave.apagarSave();
-                	for (int i = 0; i <= 2; i++) {
-                		System.out.println("");
-                			}
-                	}
-            
-        	}else {
-                	System.out.println("Nenhum jogo salvo encontrado. Iniciando novo jogo...\n");
-                	for (int i = 0; i <= 2; i++) {
-                		System.out.println("");
-                	}
-                }
-		
-		// Introdução
-		Dialogo.introCap1();
-		Dialogo.dialogoIntro_cliente();
-
-		System.out.println("\nAnonimato faz parte do trabalho, você deveria inventar um nome.");
-		
-	    String nomeJogador = "";
-        while (nomeJogador.isEmpty()) {
-            nomeJogador = scanner.nextLine().trim(); 
-            if (nomeJogador.isEmpty()) {
-                System.out.println("Por favor, insira um nome válido.");
-            }
-        }
-
-		Player.criarInstancia(nomeJogador);
-
-		System.out.println("'Me chame de " + Player.get().getNome() + ".'");
-
-		Dialogo.selectEspec();
-		int escolha = Integer.parseInt(scanner.nextLine());
-		Player.get().setEspec(escolha);
-		Player.get().playerStat();
-
-		
-		Dialogo.dialogoIntro_clienteCt();
-		Dialogo.introChegadaCidade();
-		
-		Cenario.initCenarios();
-		Cenario cenarioAtual = Cenario.cenarios.get("Lobby");
-		
-		while (true){
+	private static void gameLoop(Cenario startingCenario, Scanner scanner) {
+		Cenario cenarioAtual = startingCenario;
+		while (true) {
 			cenarioAtual.mostrarCenario();
 			String direcao = scanner.nextLine().trim();
 			direcao = Utils.removerAcentos(direcao.toLowerCase());
+			Player.get().setCenarioAtual(cenarioAtual.getClass().getSimpleName());
+
 			
 			if (!direcao.isEmpty()) {
 			    direcao = direcao.substring(0, 1).toUpperCase() + direcao.substring(1); 
@@ -121,5 +74,63 @@ public class Principal {
 				System.out.println("Direção invalida. Tente novamente...");
 			}
 		}
+	        
+	    }
+
+	private static void runNewGameIntro(Scanner scanner) {
+	    // Your existing intro code here
+	    Dialogo.introCap1();
+	    Dialogo.dialogoIntro_cliente();
+	    
+System.out.println("\nAnonimato faz parte do trabalho, você deveria inventar um nome.");
+		
+	    String nomeJogador = "";
+        while (nomeJogador.isEmpty()) {
+            nomeJogador = scanner.nextLine().trim(); 
+            if (nomeJogador.isEmpty()) {
+                System.out.println("Por favor, insira um nome válido.");
+            }
+        }
+
+		Player.criarInstancia(nomeJogador);
+
+		System.out.println("'Me chame de " + Player.get().getNome() + ".'");
+
+		Dialogo.selectEspec();
+
+		int escolha = Utils.lerInteiro(scanner, 1, 4, "...");
+
+		Player.get().setEspec(escolha);
+		Player.get().playerStat();
+
+		
+		Dialogo.dialogoIntro_clienteCt();
+		Dialogo.introChegadaCidade();
+		
+		Cenario.initCenarios();
+		Cenario cenarioAtual = Cenario.cenarios.get("Lobby");
+		gameLoop(cenarioAtual, scanner);
 	}
-}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

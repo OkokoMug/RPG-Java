@@ -1,57 +1,54 @@
 import java.util.Scanner;
 import java.io.Serializable;
 
-public class Player extends Personagem {
+public class Player extends Personagem implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
 	private static Player instancia;
 	private String nome;
-    private String classe;
     private String cenarioAtual; 
     private int especializacao;
 	
-	public Player(String n) {
-		this.nome=n;
-		instancia = this;
-	}
-	
-	public static Player get() {
-		return instancia;
-	}
-	
-	public int getMaxHp() {
-		return this.getHp();
-	}
-	
-	public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCenarioAtual() {
-        return cenarioAtual;
-    }
-
-    public void setCenarioAtual(String cenarioAtual) {
-        this.cenarioAtual = cenarioAtual;
-    }
-
-    public int getEspecializacao() {
-        return especializacao;
-    }
-
-    public void setEspecializacao(int especializacao) {
-        this.especializacao = especializacao;
+    private Player(String n) {
+        this.nome = n;
     }
 	
-	public static void criarInstancia(String nome) {
+    public static Player get() {
+        if (instancia == null) {
+            throw new IllegalStateException("Player not initialized. Call criarInstancia() first.");
+        }
+        return instancia;
+    }
+	
+    public static void criarInstancia(String nome) {
         if (instancia == null) {
             instancia = new Player(nome);
+        } else {
+            // Optional: Update name if instance already exists
+            instancia.nome = nome;
         }
     }
-	
+    
+    public Player copy() {
+        Player copy = new Player(this.nome);
+        copy.setEspec(this.getEspecIndex());
+        copy.setHp(this.hp);
+        copy.setAtk(this.atk);
+        copy.setCenarioAtual(this.cenarioAtual);
+        return copy;
+    }
+    
+    
+    public int getEspecIndex() {
+        switch(this.getEspec().toLowerCase()) {
+            case "carisma": return 1;
+            case "inteligencia": return 2;
+            case "atletismo": return 3;
+            case "furtividade": return 4;
+            default: return 0;
+        }
+    }
+    
 	public void playerStat() {
 		System.out.println("\nAqui estão suas estatísticas: "+
 							"\n --- "+this.nome+" --- "+
@@ -181,5 +178,35 @@ public class Player extends Personagem {
 			}
 		}
 	}
+	
+	 public String getCenarioAtual() {
+	        return cenarioAtual;
+	    }
+
+	 public void setCenarioAtual(String cenarioAtual) {
+	        this.cenarioAtual = cenarioAtual;
+	 }
+	    	
+		public int getMaxHp() {
+			return this.getHp();
+		}
+		
+		public String getNome() {
+	        return nome;
+	    }
+
+	    public void setNome(String nome) {
+	        this.nome = nome;
+	    }
+
+
+	    public int getEspecializacao() {
+	        return especializacao;
+	    }
+
+	    public void setEspecializacao(int especializacao) {
+	        this.especializacao = especializacao;
+	    }
+	    
 	
 }

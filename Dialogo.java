@@ -1,3 +1,8 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -219,8 +224,42 @@ public class Dialogo {
 	}
 	
 	public static void dormir_Apt() {
-		System.out.println("Voce dorme por algumas horas...");
-		GameSave.salvarJogo();
+	    System.out.println("Você dorme por algumas horas...");
+	    
+	    // First verify we can write to the directory
+	    Path saveDir = Paths.get(System.getProperty("user.home"), ".seujogo");
+	    if (!canWriteToDirectory(saveDir)) {
+	        System.out.println("AVISO CRÍTICO: Não é possível escrever no diretório de save!");
+	        System.out.println("Local: " + saveDir);
+	        System.out.println("Por favor:");
+	        System.out.println("1. Verifique as permissões da pasta");
+	        System.out.println("2. Desative temporariamente o antivírus");
+	        return;
+	    }
+	    
+	    // Try saving
+	    GameSave.salvarJogo();
+	    
+	    // Verify save
+	    if (!GameSave.existeSave()) {
+	        System.out.println("AVISO: O progresso não foi salvo!");
+	        System.out.println("Solução possível:");
+	        System.out.println("1. Execute o jogo como administrador");
+	        System.out.println("2. Verifique espaço em disco");
+	    }
+	}
+
+	private static boolean canWriteToDirectory(Path path) {
+	    try {
+	        Path testFile = path.resolve("test.tmp");
+	        Files.write(testFile, "test".getBytes(), 
+	            StandardOpenOption.CREATE, 
+	            StandardOpenOption.WRITE,
+	            StandardOpenOption.DELETE_ON_CLOSE);
+	        return true;
+	    } catch (IOException e) {
+	        return false;
+	    }
 	}
 	
 	public static void vasculhar_caixa() {
