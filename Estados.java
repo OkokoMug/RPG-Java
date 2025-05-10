@@ -1,10 +1,75 @@
+import java.util.HashMap;
+import java.util.Map;
 
 public class Estados {
-	
-	  public static boolean introCap1Mostrada = false;	
-	  public static boolean introChegadaMostrada = false;
-	  public static boolean selectEspecMostrada = false;
-	  public static boolean chegadaQuarto = false;
-	  public static boolean dialogoquartoCompleto = false;
-
+    public static final Map<String, Boolean> flags = new HashMap<>();
+    
+    static {
+    	
+        // Todas as flags
+        flags.put("introCap1Mostrada", false);
+        flags.put("introChegadaMostrada", false);
+        flags.put("selectEspecMostrada", false);
+        flags.put("chegadaQuarto", false);
+        flags.put("dialogoquartoCompleto", false);
+        flags.put("dialogoGarota_ruas", false);
+        
+    }
+    
+    public static boolean getFlag(String flagName) {
+        return flags.getOrDefault(flagName, false);
+    }
+    
+    public static void setFlag(String flagName, boolean value) {
+        flags.put(flagName, value);
+    }
+    
+    public static boolean isIntroCap1Mostrada() {
+        return getFlag("introCap1Mostrada");
+    }
+    
+    public static void setIntroCap1Mostrada(boolean value) {
+        setFlag("introCap1Mostrada", value);
+    }
+    
+    public static boolean isIntroChegadaMostrada() {
+        return getFlag("introChegadaMostrada");
+    }
+    
+    public static void setIntroChegadaMostrada(boolean value) {
+        setFlag("introChegadaMostrada", value);
+    }
+    
+    public static boolean isSelectEspecMostrada() {
+        return getFlag("selectEspecMostrada");
+    }
+    
+    public static void setSelectEspecMostrada(boolean value) {
+        setFlag("selectEspecMostrada", value);
+    }
+    
+    public static boolean isChegadaQuarto() {
+        return getFlag("chegadaQuarto");
+    }
+    
+    public static void setChegadaQuarto(boolean value) {
+        setFlag("chegadaQuarto", value);
+    }
+    
+    public static boolean isDialogoquartoCompleto() {
+        return getFlag("dialogoquartoCompleto");
+    }
+    
+    public static void setDialogoquartoCompleto(boolean value) {
+        setFlag("dialogoquartoCompleto", value);
+    }
+    
+    public static boolean isDialogoGarota_ruas() {
+        return getFlag("dialogoGarota_ruas");
+    }
+    
+    public static void setDialogoGarota_ruas(boolean value) {
+        setFlag("dialogoGarota_ruas", value);
+    }
+        
 }

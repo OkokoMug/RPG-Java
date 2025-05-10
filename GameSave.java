@@ -2,6 +2,8 @@ import java.io.*;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.file.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameSave {
     private static final String SAVE_FOLDER = ".seujogo";
@@ -10,7 +12,7 @@ public class GameSave {
     private static final int RETRY_DELAY_MS = 1000;
 
     static {
-        // Create save directory if it doesn't exist
+        // Cria um diretorio se não existe
         try {
             Files.createDirectories(Paths.get(System.getProperty("user.home"), SAVE_FOLDER));
         } catch (IOException e) {
@@ -25,7 +27,7 @@ public class GameSave {
         
         for (int attempt = 1; attempt <= MAX_RETRIES; attempt++) {
             try {
-                // 1. Write to temp file with file lock
+                // 1. Escrevend num arquivo temporario com file lock
                 try (FileChannel channel = FileChannel.open(tempPath, 
                         StandardOpenOption.CREATE, 
                         StandardOpenOption.WRITE,
@@ -36,16 +38,16 @@ public class GameSave {
                     SaveData saveData = new SaveData();
                     saveData.setPlayer(Player.get());
                     saveData.setCenarioAtual(Player.get().getCenarioAtual());
-                    saveData.setIntroCap1Mostrada(Estados.introCap1Mostrada);
-                    saveData.setIntroChegadaMostrada(Estados.introChegadaMostrada);
-                    saveData.setSelectEspecMostrada(Estados.selectEspecMostrada);
-                    saveData.setChegadaQuarto(Estados.chegadaQuarto);
-                    saveData.setDialogoquartoCompleto(Estados.dialogoquartoCompleto);
+                    Map<String, Boolean> currentFlags = new HashMap<>();
+                    for (String flagName : Estados.flags.keySet()) {
+                        currentFlags.put(flagName, Estados.getFlag(flagName));
+                    }
+                    saveData.setFlagsJogo(currentFlags);
                     
                     oos.writeObject(saveData);
                 }
 
-                // 2. Atomic replacement
+                // Substituicao atomica
                 try {
                     Files.move(tempPath, savePath, 
                         StandardCopyOption.REPLACE_EXISTING,
@@ -55,7 +57,7 @@ public class GameSave {
                         StandardCopyOption.REPLACE_EXISTING);
                 }
 
-                // 3. Verify the save
+                // Verifica o save
                 if (isSaveValid(savePath)) {
                     System.out.println("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
                     System.out.println("▒ Progresso salvo com sucesso ▒");
@@ -73,7 +75,7 @@ public class GameSave {
                     Thread.currentThread().interrupt();
                 }
                 
-                // Clean up failed temp file
+                // Exclui arquivo temporario falho
                 try { 
                     Files.deleteIfExists(tempPath); 
                 } catch (IOException ie) {
@@ -119,15 +121,13 @@ public class GameSave {
             player.setHp(savedPlayer.getHp());
             player.setAtk(savedPlayer.getAtk());
             
-            // Force apartment as starting location
             player.setCenarioAtual("Apartamento");
             
-            // Restore all game states
-            Estados.introCap1Mostrada = saveData.getIntroCap1Mostrada();
-            Estados.introChegadaMostrada = saveData.getIntroChegadaMostrada();
-            Estados.selectEspecMostrada = saveData.getSelectEspecMostrada();
-            Estados.chegadaQuarto = saveData.getChegadaQuarto();
-            Estados.dialogoquartoCompleto = saveData.getDialogoquartoCompleto();
+            // Restaura flags
+            Map<String, Boolean> loadedFlags = saveData.getFlagsJogo(); 
+            for (Map.Entry<String, Boolean> entry : loadedFlags.entrySet()) {
+                Estados.setFlag(entry.getKey(), entry.getValue());
+            }
             
             System.out.println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
             System.out.println("▒ Memórias recuperadas com sucesso ▒");

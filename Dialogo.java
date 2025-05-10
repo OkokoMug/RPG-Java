@@ -16,9 +16,8 @@ public class Dialogo {
 	
 	public static void introCap1() {
 		
-		if (!Estados.introCap1Mostrada) {
-	
-		Estados.introCap1Mostrada = true;
+		if (Estados.getFlag("introCap1Mostrada")) {
+		Estados.setFlag("introCap1Mostrada",true);
 		System.out.println("O céu perdeu sua cor há muito tempo."+
 				"\nUm manto cinza cobre a Cidade, onde o som das máquinas nunca dorme."
 				+ "\nAs caldeiras fervem noite e dia, alimentadas por petróleo e vidas humanas."
@@ -65,27 +64,27 @@ public class Dialogo {
 	//Intro cidade
 	
 	public static void introChegadaCidade() {
-		if (!Estados.introChegadaMostrada) {
-			Estados.introChegadaMostrada = true;
-		System.out.println("\nA viagem até a Cidade não foi longa, porém voce se sente exaurido.\n"+
+		if (Estados.getFlag("introChegadaMostrada")) {
+			Estados.setFlag("introChegadaMostrada", true);
+			System.out.println("\nA viagem até a Cidade não foi longa, porém voce se sente exaurido.\n"+
 						"Seja por conta das vibrações do trem, ou pela completa ausencia de qualquer verde pela janela...");}
 	}
 	
 	//Seleção de especialização
 	public static void selectEspec() {
-		
-		if (!Estados.selectEspecMostrada) {
-			
-		Estados.selectEspecMostrada = true;
-		System.out.println("\n"+
-				"Assim como os melhores ivestigadores não são perfeitos, voce também não é excelente em tudo."+
-				"\nIndique qual a sua especialidade...");
-		System.out.println("1 - Carisma");
-	    System.out.println("2 - Inteligência");
-	    System.out.println("3 - Briga");
-	    System.out.println("4 - Furtividade");
-	    System.out.println("Digite o número correspondente à especialização: ");}
-		
+
+	    if (!Estados.getFlag("selectEspecMostrada")) {
+	        System.out.println("\nAssim como os melhores investigadores não são perfeitos, "
+	            + "você também não é excelente em tudo.\n"
+	            + "Indique qual a sua especialidade...");
+	        System.out.println("1 - Carisma");
+	        System.out.println("2 - Inteligência");
+	        System.out.println("3 - Briga");
+	        System.out.println("4 - Furtividade");
+	        System.out.print("Digite o número correspondente à especialização: ");
+	        
+	        Estados.setFlag("selectEspecMostrada", true);
+	    }
 	}
 	
 	
@@ -148,16 +147,13 @@ public class Dialogo {
 	}
 	
 	public static void Intro_Apt() {
-		if(!Estados.chegadaQuarto) {
-			Estados.chegadaQuarto = true;
-			System.out.println("\nVocê finalmente chega no local aonde você vai ficar, um pequeno quarto de apartamento barato.");
-			System.out.println("Ao abrir a porta você ouve seu ranger, "
-					+ "\ne a primeira coisa visível é uma goteira no teto e um rato que foge ao perceber sua presença."
-					+ "\nPelo menos eles tem sinal e um filtrador de oxigênio para o quarto que está sujo, é claro.");
-			dialogoCliente_IntroHotel();
-		}else{
-			System.out.println("\nÉ um apartamento pequeno e simples, o suficiente para passar a semana.");
-		}
+	    if (!Estados.getFlag("chegadaQuarto")) {  
+	        Estados.setFlag("chegadaQuarto", true);  
+	        System.out.println("\nVocê finalmente chega no local aonde você vai ficar...");
+	        dialogoCliente_IntroHotel();  
+	    } else {
+	        System.out.println("\nÉ um apartamento pequeno e simples...");
+	    }
 	}
 	
 	public static void dialogoCliente_IntroHotel() {
@@ -180,6 +176,7 @@ public class Dialogo {
 			break;
 		case "3":
 			System.out.println("\nO Cliente: 'Sinto muito, detetive, mas esse é o máximo que consegui pelo seu próprio bem.'");
+			break;
 		default:
 			System.out.println("Selecione um dialogo valido...");
 		}
@@ -205,6 +202,7 @@ public class Dialogo {
 				+ "\n'Primeiro recolher informações sigilosa e as vezes comprometedoras antes de ir para a segunda etapa que é falar cara a cara com o investigado. "
 				+ "\nAmanhã a noite você começará a primeira etapa da investigação, até lá, que tal descansar um pouco?'");
 		PassagemTempo_Hora();
+		Estados.setFlag("dialogoquartoCompleto", true);
 	}
 	
 	public static void PassagemTempo_Hora() {
@@ -216,8 +214,77 @@ public class Dialogo {
 	}
 	
 	public static void RuasDialogo() {
-		System.out.println("Os estreitos suburbios da Cidade estão agitados");
+
+	    if (Estados.getFlag("dialogoquartoCompleto") && !Estados.getFlag("dialogoGarota_ruas")) {
+	        Estados.setFlag("dialogoGarota_ruas", true);
+	        dialogoGarota();
+	    }
+	    
+	    System.out.println("Os estreitos suburbios da Cidade estão agitados");
 	}
+	
+	
+	public static void dialogoGarota() {
+		System.out.println("\nVocê sai do hotel e ouve ao fundo o som de crianças dando risadas no beco em que está."
+				+ "\nTrês crianças sujas de carvão fazendo bullying com uma garota.");
+		System.out.println("\nLíder valentão: 'Você é filha de uma bruxa. Você é o motivo de todos esses corpos nas ruas. "
+				+ "\nNinguém quer você aqui!'");
+		System.out.println("\nA garota está em lágrimas por baixo da sua máscara de gás. Pela sua estatura não deve ter mais de 12 anos, você resolve ajudar."
+				+ "\nVocê se aproxima dos valentões esperando que sua presença fosse mais do que o suficiente para intimida-los, mas os garotos, "
+				+ "\nusando máscaras, apenas o encaram de volta e desafiam o seu olhar antes de começarem a fazer um circulo em sua volta.");
+		System.out.println("Líder valentão: 'O que você quer, estranho? Você tem algum envolvimento com essa filha de bruxa?'");
+		
+		System.out.println("\n1 -> 'Por que estão fazedo bullying com essa garota?'");
+		System.out.println("2 -> 'Você fala tanto que ela é filha de uma bruxa, o que quer dizer?'");
+		System.out.println("3 -> 'Continuar'");
+		String escolha = scanner.nextLine();
+		
+		while (!escolha.equals("3")) {  
+	        System.out.println("\n1 -> 'Por que estão fazendo bullying com essa garota?'");
+	        System.out.println("2 -> 'Você fala tanto que ela é filha de uma bruxa, o que quer dizer?'");
+	        System.out.println("3 -> 'Continuar'");
+	        
+	        escolha = scanner.nextLine();
+	        
+	        switch (escolha) {
+	            case "1":
+	                System.out.println("\nLíder valentão: 'Ela não é uma simples garota, é a filha de uma bruxa!'");
+	                break;
+	            case "2":
+	                System.out.println("\nLíder valentão: 'Exatamente o que quer dizer, seu idiota, ela é filha de uma bruxa que jogou praga nessas terras.'");
+	                break;
+	            case "3":
+	                System.out.println("...");
+	                break;
+	            default:
+	                System.out.println("Digite uma escolha válida...");
+	        }
+	    }
+		
+		System.out.println("\nVocê não conseguirá nada desses rapazes além de pura superstição. Eles são garotos agindo como homens, mas ainda garotos. "
+				+ "\nO melhor a se fazer é expulsar eles, mas… Como? Bater neles não é uma opção para você, mas eles com certeza estão cogitando.");
+		System.out.println("\n1 -> Bater não é uma opção, mas intimidação física sempre funciona. [Briga]");
+		System.out.println("2 ->" + Player.get().getNome() + ": 'Voltem para suas mamães ou trabalhem nas fábricas, muleques, talvez assim você vocês tragam menos decepção para suas famílias."
+				+ " É patético demais ver vocês.' [Persuasão]");
+		System.out.println("3 ->" + Player.get().getNome() + ": 'Muleques, vocês não querem se meter comigo. Um desconhecido, possivelmente perigoso, com bom humor o suficiente para dizer para vocês o seguinte. "
+				+ "\nSumam daqui.'");
+		System.out.println("4 ->Deixe eles te atacar, mas deixe a gravidade ganhar deles. [astúcia]");
+		
+		escolha = scanner.nextLine();
+		switch (escolha) {
+		case "1":
+			System.out.println("\nLíder valentão: 'Ela não é uma simples garota, é a filha de uma bruxa!'");
+			break;
+		case "2":
+			System.out.println("\nLíder valentão: 'Exatamente o que quer dizer, seu idiota, ela é filha de uma bruxa que jogou praga nessas terras.'");
+			break;
+		case "3":
+			break;
+		default:
+			System.out.println("Digite uma escolha válida...");
+		}
+	}
+	
 	
 	public static void HotelDialogo() {
 		System.out.println("Texto");
@@ -226,7 +293,7 @@ public class Dialogo {
 	public static void dormir_Apt() {
 	    System.out.println("Você dorme por algumas horas...");
 	    
-	    // First verify we can write to the directory
+	    // Verifica se posso utilizar o diretorio
 	    Path saveDir = Paths.get(System.getProperty("user.home"), ".seujogo");
 	    if (!canWriteToDirectory(saveDir)) {
 	        System.out.println("AVISO CRÍTICO: Não é possível escrever no diretório de save!");
@@ -237,10 +304,9 @@ public class Dialogo {
 	        return;
 	    }
 	    
-	    // Try saving
 	    GameSave.salvarJogo();
 	    
-	    // Verify save
+	    // Verifica save
 	    if (!GameSave.existeSave()) {
 	        System.out.println("AVISO: O progresso não foi salvo!");
 	        System.out.println("Solução possível:");

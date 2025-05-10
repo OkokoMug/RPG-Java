@@ -78,39 +78,43 @@ public class Principal {
 	    }
 
 	private static void runNewGameIntro(Scanner scanner) {
-	    // Your existing intro code here
+
+	    for (String flag : Estados.flags.keySet()) {
+	        Estados.setFlag(flag, false);
+	    }
+
 	    Dialogo.introCap1();
 	    Dialogo.dialogoIntro_cliente();
 	    
-System.out.println("\nAnonimato faz parte do trabalho, você deveria inventar um nome.");
-		
+	    System.out.println("\nAnonimato faz parte do trabalho, você deveria inventar um nome.");
+	    
 	    String nomeJogador = "";
-        while (nomeJogador.isEmpty()) {
-            nomeJogador = scanner.nextLine().trim(); 
-            if (nomeJogador.isEmpty()) {
-                System.out.println("Por favor, insira um nome válido.");
-            }
-        }
+	    while (nomeJogador.isEmpty()) {
+	        nomeJogador = scanner.nextLine().trim(); 
+	        if (nomeJogador.isEmpty()) {
+	            System.out.println("Por favor, insira um nome válido.");
+	        }
+	    }
 
-		Player.criarInstancia(nomeJogador);
+	    Player.criarInstancia(nomeJogador);
+	    System.out.println("'Me chame de " + Player.get().getNome() + ".'");
 
-		System.out.println("'Me chame de " + Player.get().getNome() + ".'");
+	    if (!Estados.getFlag("selectEspecMostrada")) {
+	        Dialogo.selectEspec();
+	        int escolha = Utils.lerInteiro(scanner, 1, 4, "...");
+	        Player.get().setEspec(escolha);
+	        Estados.setFlag("selectEspecMostrada", true);
+	    }
 
-		Dialogo.selectEspec();
-
-		int escolha = Utils.lerInteiro(scanner, 1, 4, "...");
-
-		Player.get().setEspec(escolha);
-		Player.get().playerStat();
-
-		
-		Dialogo.dialogoIntro_clienteCt();
-		Dialogo.introChegadaCidade();
-		
-		Cenario.initCenarios();
-		Cenario cenarioAtual = Cenario.cenarios.get("Lobby");
-		gameLoop(cenarioAtual, scanner);
+	    Player.get().playerStat();
+	    Dialogo.dialogoIntro_clienteCt();
+	    Dialogo.introChegadaCidade();
+	    
+	    Cenario.initCenarios();
+	    Cenario cenarioAtual = Cenario.cenarios.get("Lobby");
+	    gameLoop(cenarioAtual, scanner);
 	}
+}
 		
 		
 		
