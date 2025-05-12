@@ -41,7 +41,7 @@ public class GameSave {
                     Map<String, Boolean> currentFlags = new HashMap<>();
                     for (String flagName : Estados.flags.keySet()) {
                         currentFlags.put(flagName, Estados.getFlag(flagName));
-                    }
+                    }	
                     saveData.setFlagsJogo(currentFlags);
                     
                     oos.writeObject(saveData);

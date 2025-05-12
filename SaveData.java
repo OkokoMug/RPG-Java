@@ -41,5 +41,7 @@ public class SaveData implements Serializable {
     public void setFlagsJogo(Map<String, Boolean> flagsJogo) {
         this.flagsJogo = flagsJogo != null ? new HashMap<>(flagsJogo) : new HashMap<>();
     }
+    
+    
 }
     

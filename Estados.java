@@ -13,6 +13,8 @@ public class Estados {
         flags.put("chegadaQuarto", false);
         flags.put("dialogoquartoCompleto", false);
         flags.put("dialogoGarota_ruas", false);
+        flags.put("dialogoLouca_1", false);
+        flags.put("permissao_botanica", false);
         
     }
     
@@ -70,6 +72,22 @@ public class Estados {
     
     public static void setDialogoGarota_ruas(boolean value) {
         setFlag("dialogoGarota_ruas", value);
+    }
+    
+    public static boolean getDialogoLouca_1() {
+    	return getFlag("dialogoLouca_1");
+    }
+    
+    public static void setDialogoLouca_1(boolean value) {
+    	setFlag("dialogoLouca_1",value);
+    }
+    
+    public static boolean getPermissao_Botanica() {
+    	return getFlag("permissao_botanica");
+    }
+    
+    public static void setPermissao_Botanica(boolean value) {
+    	setFlag("permissao_botanica",value);
     }
         
 }

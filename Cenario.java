@@ -106,6 +106,7 @@ public class Cenario {
 		opcoesRuas.put("Bar", "PubG");
 		opcoesRuas.put("Hotel", "Hotel");
 		opcoesRuas.put("Estacao", "Lobby");
+		opcoesRuas.put("Parque", "Parque");
 		
 		Cenario ruas = new Cenario(
 				"Você está nas Ruas", opcoesRuas, "RuasDialogo");
@@ -125,7 +126,6 @@ public class Cenario {
 		//Apartamento
 		Map<String, String> opcoesApartamento = new LinkedHashMap<>();
 		opcoesApartamento.put("Dormir", "#dormir_Apt");
-		opcoesApartamento.put("Relembre", "#carregarJogo");
 		opcoesApartamento.put("Voltar", "Hotel");
 		
 		Cenario apartamento = new Cenario(
@@ -133,5 +133,55 @@ public class Cenario {
 		
 		cenarios.put("Apartamento", apartamento);
 		
+		//Parque
+		
+		Map<String, String> opcoesParque = new LinkedHashMap<>();
+		opcoesParque.put("Observar","#observar_parque");
+		opcoesParque.put("Voltar", "Ruas");
+		
+		if (Estados.getFlag("dialogoGarota_ruas")) {
+			opcoesParque.put("Laboratorio","Laboratorio");
+			opcoesParque.put("Botanica", "#dialogo_botanica");
+		}
+		
+		Cenario parque = new Cenario("Voce está no parque.", opcoesParque, "dialogoParque" );
+		
+		cenarios.put("Parque",parque);
+		
+		//Laboratorio
+		
+		Map<String,String> opcoesLab = new LinkedHashMap<>();
+		opcoesLab.put("Entrada", "Entrada Principal");
+		opcoesLab.put("Fundos", "Fundos");
+		opcoesLab.put("Armazem","Armazem");
+		
+		
+		Cenario lab = new Cenario("Voce está no laboratório.", opcoesLab,"dialogoLab");
+			
+		cenarios.put("Laboratorio", lab);
+		
 	}
+	
+	////////////////////////////////////
+	public void updtOpcoes(Map<String,String> novasOpcoes) {
+		this.opcoes = novasOpcoes;
+	}
+	
+	public static void updtParqueOpcoes() {
+	    Cenario parque = Cenario.cenarios.get("Parque");
+	    if (parque != null) {
+	        Map<String, String> newOpcao = new LinkedHashMap<>();
+	        newOpcao.put("Observar", "#observar_parque");
+	        newOpcao.put("Voltar", "Ruas");
+
+	        if (Estados.getFlag("dialogoGarota_ruas")) {
+	            newOpcao.put("Laboratorio", "Laboratorio");
+	            newOpcao.put("Botanica", "#dialogo_botanica");
+	        }
+
+	        parque.updtOpcoes(newOpcao); 
+	    }
+	}
+	
+	
 }	

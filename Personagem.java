@@ -1,6 +1,5 @@
 import java.io.Serializable;
 import java.util.Random;
-import java.io.Serializable;
 
 public class Personagem implements Serializable {
 	private static final long serialVersionUID = 2L;
@@ -9,10 +8,9 @@ public class Personagem implements Serializable {
 	private String espec;
 	protected int hp;
 	protected int atk;
-	private int nivel;
-	private int persuasao;
-	private int logica;
-	private int stealth;
+	protected int persuasao = 0;
+	protected int logica = 0;
+	protected int stealth = 0;
 	
 	public Personagem() {
 	}
@@ -26,7 +24,6 @@ public class Personagem implements Serializable {
 			this.espec="Carisma";
 			this.hp=7;
 			this.atk=3;
-			this.nivel=1;
 			this.persuasao=10;
 			this.logica=5;
 			this.stealth=2;
@@ -37,7 +34,6 @@ public class Personagem implements Serializable {
 			this.espec="Inteligencia";
 			this.hp=5;
 			this.atk=2;
-			this.nivel=1;
 			this.persuasao=5;
 			this.logica=10;
 			this.stealth=3;
@@ -48,7 +44,6 @@ public class Personagem implements Serializable {
 			this.espec="Atletismo";
 			this.hp=10;
 			this.atk=5;
-			this.nivel=1;
 			this.persuasao=3;
 			this.logica=2;
 			this.stealth=0;
@@ -56,10 +51,9 @@ public class Personagem implements Serializable {
 								"\nA violencia nua e crua. A natureza da humanidade.");
 		}
 		if (n==4) {
-			this.espec="Furtividade";
+			this.espec="Malemolencia";
 			this.hp=5;
 			this.atk=1;
-			this.nivel=1;
 			this.persuasao=1;
 			this.logica=5;
 			this.stealth=10;
@@ -111,10 +105,6 @@ public class Personagem implements Serializable {
 		this.hp=n;
 	}
 	
-	public int getNivel() {
-		return this.nivel;
-	}
-	
 	public int getPersuasao() {
 		return this.persuasao;
 	}
@@ -123,8 +113,10 @@ public class Personagem implements Serializable {
 		return this.logica;
 	}
 	
+	
 	public int getStealth() {
 		return this.stealth;
 	}
+	
 	
 }

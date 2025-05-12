@@ -1,4 +1,5 @@
 import java.text.Normalizer;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Utils {
@@ -41,6 +42,12 @@ public class Utils {
 	        }
 	    }
 	    System.out.println();
+	}
+	
+	public static boolean rollPersuasao(int playerPersuasao) {
+		Random rand = new Random();
+	    int roll = rand.nextInt(20) + 1; 
+	    return roll <= playerPersuasao; 
 	}
 	
 	

@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Dialogo {
 	
 	private static final Scanner scanner = new Scanner(System.in);
+	private static final Random rand = new Random();
 	
 	//Dialogos historia
 	//Capitulo 1
@@ -16,7 +17,7 @@ public class Dialogo {
 	
 	public static void introCap1() {
 		
-		if (Estados.getFlag("introCap1Mostrada")) {
+		if (!Estados.getFlag("introCap1Mostrada")) {
 		Estados.setFlag("introCap1Mostrada",true);
 		System.out.println("O céu perdeu sua cor há muito tempo."+
 				"\nUm manto cinza cobre a Cidade, onde o som das máquinas nunca dorme."
@@ -64,7 +65,7 @@ public class Dialogo {
 	//Intro cidade
 	
 	public static void introChegadaCidade() {
-		if (Estados.getFlag("introChegadaMostrada")) {
+		if (!Estados.getFlag("introChegadaMostrada")) {
 			Estados.setFlag("introChegadaMostrada", true);
 			System.out.println("\nA viagem até a Cidade não foi longa, porém voce se sente exaurido.\n"+
 						"Seja por conta das vibrações do trem, ou pela completa ausencia de qualquer verde pela janela...");}
@@ -79,9 +80,9 @@ public class Dialogo {
 	            + "Indique qual a sua especialidade...");
 	        System.out.println("1 - Carisma");
 	        System.out.println("2 - Inteligência");
-	        System.out.println("3 - Briga");
-	        System.out.println("4 - Furtividade");
-	        System.out.print("Digite o número correspondente à especialização: ");
+	        System.out.println("3 - Atletismo");
+	        System.out.println("4 - Malemolencia");
+	        System.out.println("Digite o número correspondente à especialização: ");
 	        
 	        Estados.setFlag("selectEspecMostrada", true);
 	    }
@@ -112,20 +113,19 @@ public class Dialogo {
 	
 	//Dialogos de inicio de combate serão escolhidos aleatoriamente
 	public static void combate(String inimigo) {
-		Random rand = new Random();
 		int i = rand.nextInt(iniCombate.length);
 		System.out.println(iniCombate[i] + " Voce é surpreendido por  " + inimigo + "!");
 	}
 	
 	//Escolhe os dialogos de vitoria aleatoriamente
 	public static void vitoria() {
-		int i = new Random().nextInt(dialogoVitoria.length);
+		int i = rand.nextInt(dialogoVitoria.length);
 		System.out.println(dialogoVitoria[i]);
 	}
 	
 	//Escolhe dialogo dos itens aleatoriamente
 	public static void achaItem(String nomeItem) {
-		int i = new Random().nextInt(dialogoItem.length);
+		int i = rand.nextInt(dialogoItem.length);
 		System.out.println(dialogoItem[i] + " Voce achou " + nomeItem);
 	}
 	
@@ -217,6 +217,7 @@ public class Dialogo {
 
 	    if (Estados.getFlag("dialogoquartoCompleto") && !Estados.getFlag("dialogoGarota_ruas")) {
 	        Estados.setFlag("dialogoGarota_ruas", true);
+	        Cenario.updtParqueOpcoes();
 	        dialogoGarota();
 	    }
 	    
@@ -233,19 +234,13 @@ public class Dialogo {
 				+ "\nVocê se aproxima dos valentões esperando que sua presença fosse mais do que o suficiente para intimida-los, mas os garotos, "
 				+ "\nusando máscaras, apenas o encaram de volta e desafiam o seu olhar antes de começarem a fazer um circulo em sua volta.");
 		System.out.println("Líder valentão: 'O que você quer, estranho? Você tem algum envolvimento com essa filha de bruxa?'");
-		
-		System.out.println("\n1 -> 'Por que estão fazedo bullying com essa garota?'");
-		System.out.println("2 -> 'Você fala tanto que ela é filha de uma bruxa, o que quer dizer?'");
-		System.out.println("3 -> 'Continuar'");
-		String escolha = scanner.nextLine();
-		
+	        
+		String escolha = "";
 		while (!escolha.equals("3")) {  
-	        System.out.println("\n1 -> 'Por que estão fazendo bullying com essa garota?'");
-	        System.out.println("2 -> 'Você fala tanto que ela é filha de uma bruxa, o que quer dizer?'");
-	        System.out.println("3 -> 'Continuar'");
-	        
+			System.out.println("\n1 -> 'Por que estão fazendo bullying com essa garota?'");
+			System.out.println("2 -> 'Você fala tanto que ela é filha de uma bruxa, o que quer dizer?'");
+			System.out.println("3 -> 'Continuar'");
 	        escolha = scanner.nextLine();
-	        
 	        switch (escolha) {
 	            case "1":
 	                System.out.println("\nLíder valentão: 'Ela não é uma simples garota, é a filha de uma bruxa!'");
@@ -263,33 +258,186 @@ public class Dialogo {
 		
 		System.out.println("\nVocê não conseguirá nada desses rapazes além de pura superstição. Eles são garotos agindo como homens, mas ainda garotos. "
 				+ "\nO melhor a se fazer é expulsar eles, mas… Como? Bater neles não é uma opção para você, mas eles com certeza estão cogitando.");
-		System.out.println("\n1 -> Bater não é uma opção, mas intimidação física sempre funciona. [Briga]");
+		System.out.println("\n1 -> Bater não é uma opção, mas intimidação física sempre funciona. [Atletismo]");
 		System.out.println("2 ->" + Player.get().getNome() + ": 'Voltem para suas mamães ou trabalhem nas fábricas, muleques, talvez assim você vocês tragam menos decepção para suas famílias."
 				+ " É patético demais ver vocês.' [Persuasão]");
 		System.out.println("3 ->" + Player.get().getNome() + ": 'Muleques, vocês não querem se meter comigo. Um desconhecido, possivelmente perigoso, com bom humor o suficiente para dizer para vocês o seguinte. "
 				+ "\nSumam daqui.'");
-		System.out.println("4 ->Deixe eles te atacar, mas deixe a gravidade ganhar deles. [astúcia]");
+		System.out.println("4 ->Deixe eles te atacar, mas deixe a gravidade ganhar deles. [Malemolencia]");
 		
 		escolha = scanner.nextLine();
 		switch (escolha) {
 		case "1":
-			System.out.println("\nLíder valentão: 'Ela não é uma simples garota, é a filha de uma bruxa!'");
+			System.out.println("\nVocê segura o líder valentão pela gola da camisa e o ergue no ar. "
+					+ "\nNenhum dos garotos esperavam que um adulto sensato fizesse isso. Que bom que você não é. "
+					+ "\nApós o recado dado sem dizer nada você larga o garoto. ");
+			System.out.println("\nAtaque aumentou.");
+			Player.get().incAtk();
 			break;
 		case "2":
-			System.out.println("\nLíder valentão: 'Exatamente o que quer dizer, seu idiota, ela é filha de uma bruxa que jogou praga nessas terras.'");
+			System.out.println("\nPersuasao aumentou.");
+			Player.get().incPersu();
 			break;
 		case "3":
+			System.out.println("...");
+			break;
+		case "4":
+			System.out.println("\nO seu silêncio faz os garotos investirem contra você. "
+					+ "\nVocê se esquiva, coloca a perna na frente deles e, como prometido, a gravidade vence a luta.");
 			break;
 		default:
 			System.out.println("Digite uma escolha válida...");
 		}
+		
+		System.out.println("\nOs garotos entram em lágrimas após sua reação e "
+				+ "\nos dois capangas mirins fogem enquanto o líder valentão grita para você.");
+		System.out.println("\nLíder valentão: 'Você vai ver uma só! Nós vamos nos vingar!'");
+		
+		System.out.println("\nSpoiler: eles não vão. Ao olhar para a garota, ela simplesmente foge como um gato assustado e some em meio aos subúrbios. "
+				+ "\nTalvez você encontre ela novamente? Enfim, de volta ao trabalho, você precisa investigar o laboratório "
+				+ "\nque teve o primeiro avistamento da doença de Mark Alighieri.");
+		
 	}
 	
+	public static void dialogoParque() {
+		if (!Estados.getFlag("dialogoGarota_ruas")) {
+			System.out.println("Preciso ir ao Hotel descansar...");
+		}else {
+			System.out.println("\nVoce ve pessoas com caminhar pesado indo de um lado ao outro.");
+		}
+	}
+	
+	public static void dialogoLab() {
+		System.out.println("\nO laboratório é um prédio branco enorme altamente guardado. "
+				+ "\nCâmeras de segurança então por todo o canto, guardas em patrulha, cargas indo e vindo. "
+				+ "\nO local é mais bem cuidado que muitos bancos.");
+	}
 	
 	public static void HotelDialogo() {
-		System.out.println("Texto");
+		System.out.println("Um hotel com aparencia antiga e decadente.");
 	}
 	
+	
+	//Acoes especias
+	
+	public static void dialogo_botanica() {
+	    Estados.setFlag("dialogoLouca_1", true);
+	    
+	    System.out.println("\nPelo dia você ouviu falar de uma pessoa exótica chamada de 'curandeira', 'médica' ou apenas 'louca das plantas'. "
+	            + "\nAo chegar no local você entende o porquê: uma estufa improvisada.");
+	    System.out.println("\nO local é grande apesar de parecer pequeno por fora, mas sua beleza está na quantidade de plantas sendo cultivadas ali. "
+	            + "\nA quantidade de verde é absurda. Ao andar pelo local, você encontra a mulher que tanto falam - uma pessoa de ~30 anos com "
+	            + "\nroupas de jardinagem e um braço mecânico substituindo seu braço esquerdo. Ela finalmente te nota.");
+
+	    System.out.println("\nGine: 'Oh.. ah! Um cliente! Desculpe a bagunça, eu estava plantando alguns vegetais... Bem, "
+	            + "\nvendo se eles sobrevivem ao clima da cidade. Prazer, me chamo Gine, e você?'");
+	    System.out.println("'Prazer, sou " + Player.get().getNome() + "'");
+	    System.out.println("\nGine: 'Você não é daqui, não é? Conheceria alguém com sua... aura... "
+	            + "\nSeja bem-vindo ao meu pedaço do paraíso! Não é muito, mas tudo é feito com carinho.'");
+
+	    String escolha = "";
+	    while (!escolha.equals("6")) {
+	        System.out.println("\n1 -> 'Como você construiu esse lugar?'");
+	        System.out.println("2 -> 'O que exatamente você faz aqui?'");
+	        System.out.println("3 -> 'Minha... aura?'");
+	        System.out.println("4 -> 'Sabe algo sobre a doença?'");
+	        System.out.println("5 -> 'Conhece o farmacêutico Mark?'");
+	        System.out.println("6 -> Sair");
+
+	        escolha = scanner.nextLine();
+	        switch(escolha) {
+	            case "1":
+	                System.out.println("\nGine: 'Ah! Bem, gastei minha vida toda nisso. "
+	                        + "\nSempre foi meu sonho trabalhar com plantas... Pela primeira vez estou fazendo algo que amo.'");
+	                break;
+	                
+	            case "2":
+	                System.out.println("\nGine: 'Sou botânica. Estudo plantas, cultivo plantas, como plantas... "
+	                        + "\nAté observo como elas se comunicam! Também faço medicamentos básicos com elas.'");
+	                System.out.println("\nPlantas que se comunicam? Não à toa a chamam de louca... Mas uma louca útil.");
+	                break;
+	                
+	            case "3":
+	                System.out.println("\nGine: 'Sim! Você parece misterioso, como se escondesse segredos. "
+	                        + "\nAté desconfio se seu nome é real... Brincadeirinha, senhor!'");
+	                break;
+	                
+	            case "4":
+	                System.out.println("\nGine: 'Sei os sintomas: olhos vermelhos, pele manchada, suor excessivo antes da morte... "
+	                        + "\nChamam de 'Febre da Engrenagem'. As pessoas vêm atrás de milagres, mas só posso oferecer paliativos... "
+	                        + "\nPrecisaria saber a causa para algo melhor.'");
+	                break;
+	                
+	            case "5":
+	                if (Estados.getFlag("permissao_botanica")) {
+	                    System.out.println("\nGine: 'Já falamos sobre isso, lembra? Você vai entregar minhas plantas pra ele.'");
+	                    break;
+	                }
+	                
+	                System.out.println("\nGine: 'Pessoalmente? Não, só trabalho profissionalmente. Ele compra plantas para seus laboratórios.'");
+	                System.out.println("\nEla fornece plantas para Mark? Isso pode ser útil...");
+	                System.out.println("\n1 -> 'Eu poderia entregar para você' [Persuasão]");
+	                System.out.println("2 -> Melhor não se meter");
+	                
+	                escolha = scanner.nextLine();
+	                switch(escolha) {
+	                    case "1":
+	                        if (Utils.rollPersuasao(Player.get().getPersuasao())) {
+	                            System.out.println("\n[SUCESSO] Gine: 'Sério? Não se incomodaria? Detesto ir àquele lugar branco e estéril... "
+	                                    + "\nPrefiro ficar aqui com minhas plantas.'");
+	                            Estados.setFlag("permissao_botanica", true);
+	                        } else {
+	                            System.out.println("\n[FALHA] Gine: 'Obrigada, mas... melhor eu entregar pessoalmente. Não quero mal-entendidos.'");
+	                        }
+	                        break;
+	                        
+	                    case "2":
+	                        System.out.println("\nVocê decide não se arriscar");
+	                        break;
+	                        
+	                    default:
+	                        System.out.println("\nOpção inválida.");
+	                }
+	                break;
+	                
+	            case "6":
+	                System.out.println("\n'Obrigado pela conversa, Gine. Preciso ir.'");
+	                break;
+	                
+	            default:
+	                System.out.println("\nEscolha uma opção válida.");
+	        }
+	    }
+
+
+	    System.out.println("\nAo sair, Gine corre atrás de você:");
+	    System.out.println("\nGine: 'Espere! Se descobrir algo sobre plantas ou a doença... me avise? Quero ajudar essas pessoas.'");
+	    System.out.println("\n(Você concorda, deixando-a esperançosa. Seu braço mecânico mostra que ela já foi uma delas.)");
+	}
+	
+	
+	
+	/////////******************************///////////////////////
+	
+	
+	
+	public static void observar_parque() {
+		
+		System.out.println("\nUm parque esdruxulo. Não parece estar muito bem cuidado...");
+	}
+	
+	public static void vasculhar_caixa() {
+        System.out.println("Você encontra uma chave velha dentro da caixa.");
+	    }
+	
+	public static void olha_espelho() {
+		System.out.println("Voce se olha através do espelho embaçado. Voce sente que precisa dormir mais...");
+	}
+
+	public static void usa_toilet() {
+		System.out.println("Voce abre a porta para o toilet, mas por conta do odor, voce desiste de utiliza-lo...");
+	}
+
 	public static void dormir_Apt() {
 	    System.out.println("Você dorme por algumas horas...");
 	    
@@ -314,31 +462,19 @@ public class Dialogo {
 	        System.out.println("2. Verifique espaço em disco");
 	    }
 	}
-
-	private static boolean canWriteToDirectory(Path path) {
-	    try {
-	        Path testFile = path.resolve("test.tmp");
-	        Files.write(testFile, "test".getBytes(), 
-	            StandardOpenOption.CREATE, 
-	            StandardOpenOption.WRITE,
-	            StandardOpenOption.DELETE_ON_CLOSE);
-	        return true;
-	    } catch (IOException e) {
-	        return false;
-	    }
-	}
+	    
+	    private static boolean canWriteToDirectory(Path path) {
+		    try {
+		        Path testFile = path.resolve("test.tmp");
+		        Files.write(testFile, "test".getBytes(), 
+		            StandardOpenOption.CREATE, 
+		            StandardOpenOption.WRITE,
+		            StandardOpenOption.DELETE_ON_CLOSE);
+		        return true;
+		    } catch (IOException e) {
+		        return false;
+		    }
+		}
 	
-	public static void vasculhar_caixa() {
-        System.out.println("Você encontra uma chave velha dentro da caixa.");
-	    }
-	
-	public static void olha_espelho() {
-		System.out.println("Voce se olha através do espelho embaçado. Voce sente que precisa dormir mais...");
-	}
-
-	public static void usa_toilet() {
-		System.out.println("Voce abre a porta para o toilet, mas por conta do odor, voce desiste de utiliza-lo...");
-	}
-
 
 }
