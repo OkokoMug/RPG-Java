@@ -15,6 +15,12 @@ public class Estados {
         flags.put("dialogoGarota_ruas", false);
         flags.put("dialogoLouca_1", false);
         flags.put("permissao_botanica", false);
+        flags.put("elevador_acesso", false);
+        flags.put("documentos_markOk", false);
+        flags.put("garotaNoApt", false);
+        flags.put("conheceu_Lua", false);
+        flags.put("cap2_inicio", false);
+        flags.put("dialogoLuaCap2Apt_mostrado", false);
         
     }
     
@@ -88,6 +94,22 @@ public class Estados {
     
     public static void setPermissao_Botanica(boolean value) {
     	setFlag("permissao_botanica",value);
+    }
+    
+    public static boolean getElevador_acesso() {
+    	return getFlag("elevador_acesso");
+    }
+    
+    public static void setElevador_acesso(boolean value) {
+    	setFlag("elevador_acesso",value);
+    }
+    
+    public static boolean getDocumentos_markOk() {
+    	return getFlag("documentos_markOk");
+    }
+    
+    public static void setDocumentos_markOk(boolean value) {
+    	setFlag("documentos_markOk",value);
     }
         
 }

@@ -23,9 +23,9 @@ public class Personagem implements Serializable {
 		if (n==1) {
 			this.espec="Carisma";
 			this.hp=7;
-			this.atk=3;
+			this.atk=10;
 			this.persuasao=10;
-			this.logica=5;
+			this.logica=10;
 			this.stealth=2;
 			System.out.println("\nVoce sempre soube que o melhor modo de lidar com alguém, é com palavras. " +
 								"\n Confiança. Manipulação. Assim foi sua vida neste mundo.");
@@ -33,9 +33,9 @@ public class Personagem implements Serializable {
 		if (n==2) {
 			this.espec="Inteligencia";
 			this.hp=5;
-			this.atk=2;
+			this.atk=5;
 			this.persuasao=5;
-			this.logica=10;
+			this.logica=15;
 			this.stealth=3;
 			System.out.println("\nNão há espaço para fé por essas bandas. Por conta disso, voce se prendeu ao pragmatismo."+
 								"\nA inteligência não está em saber tudo, mas em saber discernir o essencial em meio ao ruído do mundo.");
@@ -43,9 +43,9 @@ public class Personagem implements Serializable {
 		if (n==3) {
 			this.espec="Atletismo";
 			this.hp=10;
-			this.atk=5;
+			this.atk = 15;
 			this.persuasao=3;
-			this.logica=2;
+			this.logica=10;
 			this.stealth=0;
 			System.out.println("\nNão há parceiros mais confiáveis do que seus próprios punhos. " + 
 								"\nA violencia nua e crua. A natureza da humanidade.");
@@ -53,9 +53,9 @@ public class Personagem implements Serializable {
 		if (n==4) {
 			this.espec="Malemolencia";
 			this.hp=5;
-			this.atk=1;
+			this.atk=10;
 			this.persuasao=1;
-			this.logica=5;
+			this.logica=10;
 			this.stealth=10;
 			System.out.println("\nÉ preciso muito esforço e habilidade para esconder o próprio talento e competência. " +
 								"\nA arte de ser sutil abre muitas portas, incluindo aquelas que não estão a vista.");

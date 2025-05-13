@@ -38,23 +38,23 @@ public class Player extends Personagem implements Serializable{
     }
     
     public void incAtk() { 
-        atk = Math.min(atk + 1, 50); 
+        atk = Math.min(atk + 1, 21); 
     }
     
     public void incHp() {
-    	hp = Math.min(hp + 1, 100);
+    	hp = Math.min(hp + 1, 21);
     }
     
     public void incPersu() {
-    	persuasao = Math.min(persuasao + 1, 20);
+    	persuasao = Math.min(persuasao + 1, 21);
     }
     
     public void incLogica() {
-    	logica = Math.min(logica + 1, 20);
+    	logica = Math.min(logica + 1, 21);
     }
     
     public void incStealth() {
-    	stealth = Math.min(stealth + 1, 20);
+    	stealth = Math.min(stealth + 1, 21);
     }
     
     

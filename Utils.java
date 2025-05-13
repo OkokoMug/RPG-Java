@@ -50,5 +50,17 @@ public class Utils {
 	    return roll <= playerPersuasao; 
 	}
 	
+	public static boolean rollAtletismo(int playerAtletismo) {
+		Random rand = new Random();
+		int roll = rand.nextInt(20)+1;
+		return roll <= playerAtletismo;
+	}
+	
+	public static boolean rollLogica(int logicaStat) {
+	    Random rand = new Random();
+	    int roll = rand.nextInt(20) + 1;
+	    return roll <= logicaStat; 
+	}
+	
 	
 }

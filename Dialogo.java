@@ -3,6 +3,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -147,13 +152,173 @@ public class Dialogo {
 	}
 	
 	public static void Intro_Apt() {
-	    if (!Estados.getFlag("chegadaQuarto")) {  
-	        Estados.setFlag("chegadaQuarto", true);  
+
+	    if (!Estados.getFlag("chegadaQuarto")) {
 	        System.out.println("\nVocê finalmente chega no local aonde você vai ficar...");
-	        dialogoCliente_IntroHotel();  
+	        dialogoCliente_IntroHotel();
+	        Estados.setFlag("chegadaQuarto", true);
 	    } else {
-	        System.out.println("\nÉ um apartamento pequeno e simples...");
+	        System.out.println("\nÉ um apartamento pequeno e simples..."); 
 	    }
+
+
+	    if (Estados.getFlag("documentos_markOk") && !Estados.getFlag("garotaNoApt")) {
+	        System.out.println("\nMas algo está diferente..."); 
+	        encontroGarotaApt(); 
+	    }
+	    
+	    if (Estados.getFlag("conheceu_Lua") && 
+	       Estados.getFlag("Cap2_inicio") && 
+	       !Estados.getFlag("dialogoLuaCap2Apt_mostrado")) {
+	        dialogoLuaCap2();
+	    }
+	}
+	
+	private static void encontroGarotaApt() {
+	    Estados.setFlag("garotaNoApt", true);
+	    
+	    System.out.println("\nVocê finalmente chegou no seu apartamento. Porta rangendo. Rato. Goteira. Você já sabe como é.");
+	    System.out.println("Você está prestes a ligar o filtrador quando percebe a janela aberta. Você deixou ela aberta?");
+	    System.out.println("Você fecha a janela e seu corpo entra em estado de alerta - alguém entrou aqui.");
+	    System.out.println("\nFamília Alighieri? Arasaka? O cliente lhe traiu?");
+	    System.out.println("Sua mente entra em um turbilhão de possibilidades...");
+	    
+	    try { 
+	    	Thread.sleep(1500); 
+	    	} catch (InterruptedException e) {}
+	    
+	    System.out.println("\nA maçaneta do banheiro gira lentamente.");
+	    
+	    try { 
+	    	Thread.sleep(1000); 
+	    	} catch (InterruptedException e) {}
+	    
+	    System.out.println("Você se prepara para o pior, mãos firmes...");
+	    
+	    try { 
+	    	Thread.sleep(1000); 
+	    	} catch (InterruptedException e) {}
+	    
+	    System.out.println("\nA porta se abre - e revela... uma criança?");
+	    System.out.println("Você e a garota se encaram em silêncio por um momento eterno.");
+	    System.out.println("Seus músculos relaxam gradualmente, mas sua mente ainda está em alerta.");
+	    
+	    System.out.println("\nEla parece ter não mais que 10 anos:");
+	    System.out.println("- Estatura pequena, sinais de subnutrição");
+	    System.out.println("- Cabelo longo e castanho, sujo de fuligem");
+	    System.out.println("- Veste um macacão industrial grande demais");
+	    System.out.println("- Máscara de gás infantil desgastada");
+	    System.out.println("\nVocê a reconhece - é a mesma garota do beco mais cedo.");
+	    
+	    System.out.println("\nApós um silêncio tenso, ela finalmente fala:");
+	    System.out.println("Garota: ‘Você não é um invasor. "
+	    		+ "\nVocê é o salvador de Lua, Lua grata e Lua proteger casa. Fique a vontade.’");
+	    
+	    System.out.println("\nOk, ela abrir a boca só parece deixar a situação mais confusa e inusitada. "
+	    		+ "\nVocê liga o filtrador para pensar melhor. Alguns questionamentos devem serem feitos. ");
+	    
+	    System.out.println("\n1 -> 'Quem é você, pequena?'");
+	    System.out.println("2 -> 'O que você está fazendo aqui?'");
+	    System.out.println("3 -> 'Onde estão seus pais?'");
+	    System.out.println("4 -> 'De manhã, ouvi os garotos chamando você de \"filha de bruxa\", porque?'");
+	    System.out.println("5 -> Continuar");
+
+	    String escolha = "";
+	    while (!escolha.equals("5")) {  
+	        escolha = scanner.nextLine();
+	        
+	        if (escolha.equals("1")) {
+	            System.out.println("\n'Lua é Lua.'");
+	        } 
+	        else if (escolha.equals("2")) {
+	            System.out.println("\nGarota: 'Lua proteger casa de homens maus.'");
+	        }
+	        else if (escolha.equals("3")) {
+	            System.out.println("\nGarota: 'Lua não sabe, Lua procura, mas mamãe, puuuf, sumiu.'");
+	        }
+	        else if (escolha.equals("4")) {
+	            System.out.println("\nA garota parece ter se irritado com a pergunta, ou melhor, pela lembrança.");
+	            System.out.println("Ela abaixa a cabeça, enquanto olha nos seus olhos de forma tímida antes de falar.");
+	            System.out.println("\n'Porque mamãe de Lua era inteligente e eles são burros.'");
+	        }
+	        else if (escolha.equals("5")) {
+	            System.out.println("\nVocê decide mudar de assunto...");
+	            break; 
+	        }
+	        else {
+	            System.out.println("\nOpção inválida. Escolha de 1 a 5.");
+	        }
+
+	        if (!escolha.equals("5")) {
+	            System.out.println("\nO que mais você quer perguntar?");
+	            System.out.println("1 -> 'Quem é você, pequena?'");
+	            System.out.println("2 -> 'O que você está fazendo aqui?'");
+	            System.out.println("3 -> 'Onde estão seus pais?'");
+	            System.out.println("4 -> 'De manhã, ouvi os garotos chamando você de \"filha de bruxa\", porque?'");
+	            System.out.println("5 -> Continuar");
+	        }
+	    }
+	    
+	    System.out.println("\nA criança, aparentemente chamada de “Lua”, sua mãe está desaparecia e ela tem sofrido bullying "
+    			+ "\npor causa de “Bruxaria” da mesma. Além disso, ela invadiu sua casa querendo lhe recompensar “protegendo” sua casa. "
+    			+ "\nA realidade é mais dura do que isso, a garota é órfã e só não tem aonde ir, talvez você tenha sido a única pessoa a ajuda-la nesse tempo. "
+    			+ "\nVocê agora não só deve cuidar da criança, mas saber o porquê dessas caça as bruxas com ela. "
+    			+ "\nVocê em silêncio vai em direção ao banheiro, a garota fica com medo da sua aproximação ser uma possível expulsão dela, mas… "
+    			+ "\nVocê só quer tomar banho. As paredes não são nem um pouco grossa, então você conegue ouvir Lua falando enquanto toma banho.");
+    	
+	    System.out.println("\nLua: 'Lua vai ficar com homem forte e assutador, ai Lua vai aprender a ser forte e assutadora, ai Lua vai assustar os homens maus igual "
+    			+ "\no homem forte e assustador! "
+    			+ "\nLua vai ser a mulher mais forte do mundo!'");
+    	System.out.println("\nO resto do que você ouve é uma sequência de socos e chutes encenados pela garota. Você vai ter que cuidar dela pelo visto. "
+    			+ "\nAo sair do banheiro já vestido e sem sua máscara, você prepara uma refeição básica para você e a sua nova residente antes de "
+    			+ "\nse sentar na cama e conversar com ela mais.");
+    	System.out.println("\n'Prazer em conhece-la, Lua, me chamo " + Player.get().getNome() + ". Você pode ficar aqui. "
+    			+ "\nEu preciso de alguém que cuide da minha casa enquanto estiver fora");
+    	System.out.println("\nA garota está ainda usando sua máscara mesmo com o filtrado ligado. Ela come colocando a comida debaixo da máscara, "
+    			+ "\ne parece estar adorando mesmo sendo algo simples. Ela fala de boca cheia.");
+    	System.out.println("Lua: 'Lua vai cuidar! Enquanto " + Player.get().getNome()+ "estiver fora, Lua cuida! Lua não ser forte, mas ser inteligente. "
+    			+ "\nMamãe dizia isso.'");
+    	System.out.println("\nVocê não conseguirá nenhuma informação vindo dela. Talvez com o tempo? No momento, ela está claramente faminta e cansada. "
+    			+ "\nUm banho deve ser dado a ela de manhã, e voce deve escolher onde dormir. Hoje você não ficará no colchão velho e sim no chão úmido.");
+    	
+    	System.out.println("\n'Lua, porque você não tira a máscara?'");
+    	System.out.println("\nLua:'Mamãe disse que Lua não respira sem a máscara. Lua precisa respirar.'");
+    	System.out.println("\n'Mas há filtradores pela casa, está tudo bem.'");
+    	System.out.println("\nLua: 'O que é isso?'");
+    	System.out.println("\n'É o que me permite respirar sem a máscara. Não vê que estou sem? Você também pode, Lua, só tentar.'");
+    	
+    	System.out.println("\nA garota para sua refeição para pensar no que você disse e, após um pequeno momento, "
+    			+ "\nela pega a máscara e coloca apenas merade do rosto para fora. Agora é visível seus olhos curiosos e perdidos, "
+    			+ "\nalém de um sorriso sincero pela situação, mas parece não querer tirar a máscara por costume.");
+    	System.out.println("\nLua: 'Hehe, mestre ensinou Lua a respirar sem máscara'");
+    	System.out.println("\n'Mestre? Eu não te ensinei a respirar sem, quando estiver do lado de fora deve vestir novamente.'");
+    	System.out.println("\nLua: 'Sim! Você ser mestre de Lua! Não precia ensinar, Lua aprende sozinha vendo mestre. "
+    			+ "Lua inteligente, se lembre.'");
+    	System.out.println("\n'Me lembrarei, Lua…'");
+    	
+    	System.out.println("\nA refeição enfim termina. Lua insiste em ficar acordada para “vigia noturna”, mas suas insistências e "
+    			+ "\na refeição enfim deram sono a ela. Ela dormiu no colchão e logo em seguida você também dormiu, no chão.");
+    	
+    	GameSave.salvarJogo();
+    	PassagemTempo_Hora();
+	    Estados.setFlag("conheceu_Lua", true);
+	    Estados.setFlag("Cap2_inicio",true);
+	}
+	
+	public static void dialogoLuaCap2() {
+	    System.out.println("\nVocê finalmente está pronto para mais um dia de trabalho.");
+	    System.out.println("Lua está alimentada, tomou um banho apesar da resistência,");
+	    System.out.println("e agora está assistindo na TV velha do apartamento, ainda com metade da máscara.");
+	    System.out.println("Está na hora de ir.\n");
+	    
+	    System.out.println("Ao tentar sair...");
+	    System.out.println("Lua: 'Onde está indo, mestre?'");
+	    System.out.println("'Já falei para não me chamar de mestre, Lua. E estou saindo a trabalho.'");
+	    System.out.println("Lua: 'Lua pode ir junta?! Lua quer aprender.'");
+	    System.out.println("'Talvez em outro momento, mas não agora. Irei conversar com pessoas importantes. Você deve ficar aqui.'");
+	    System.out.println("Ela faz um bico de birra, mas assente com sua ordem.");
+	    
+	    Estados.setFlag("dialogoLuaCap2Apt_mostrado", true);
 	}
 	
 	public static void dialogoCliente_IntroHotel() {
@@ -206,11 +371,18 @@ public class Dialogo {
 	}
 	
 	public static void PassagemTempo_Hora() {
-		for (int i = 1; i <= 20; i++) {
-			System.out.println("...");
-		}
-		
-		System.out.print("18:00 - SEGUNDA-FEIRA\n");
+		System.out.println("\nAs horas passam...");
+	    for (int i = 0; i < 3; i++) {
+	        System.out.print(".");
+	        try {
+	            Thread.sleep(1000);
+	        } catch (InterruptedException e) {
+	            Thread.currentThread().interrupt();
+	        }
+	    }
+	    
+	    System.out.print("\033[H\033[2J");
+	    System.out.flush();
 	}
 	
 	public static void RuasDialogo() {
@@ -307,21 +479,35 @@ public class Dialogo {
 		}
 	}
 	
+	public static void dialogoLabPrincipal() {
+		System.out.println("\nPessoas vestidas em jalecos caminham de um lado ao outro com passos apressados.");
+	}
+	
+	public static void dialogoLabFundos() {
+		System.out.println("\nVoce ve alguns funcionarios fumando, mas nenhum segurança...");
+	}
+	
+	public static void dialogoLabArmazem() {
+		System.out.println("\nVoce ve caixas empilhadas e há uma porta para entrada de funcionarios.");
+	}
+	
 	public static void dialogoLab() {
 		System.out.println("\nO laboratório é um prédio branco enorme altamente guardado. "
 				+ "\nCâmeras de segurança então por todo o canto, guardas em patrulha, cargas indo e vindo. "
 				+ "\nO local é mais bem cuidado que muitos bancos.");
+		
+		if (!Estados.getFlag("dialogoLouca_1")) {
+			System.out.println("\nSeria melhor dar uma olhada no Parque");
+		}
 	}
 	
 	public static void HotelDialogo() {
 		System.out.println("Um hotel com aparencia antiga e decadente.");
 	}
 	
-	
-	//Acoes especias
-	
 	public static void dialogo_botanica() {
 	    Estados.setFlag("dialogoLouca_1", true);
+	    Cenario.updtLabOpcoes();
 	    
 	    System.out.println("\nPelo dia você ouviu falar de uma pessoa exótica chamada de 'curandeira', 'médica' ou apenas 'louca das plantas'. "
 	            + "\nAo chegar no local você entende o porquê: uma estufa improvisada.");
@@ -369,10 +555,6 @@ public class Dialogo {
 	                break;
 	                
 	            case "5":
-	                if (Estados.getFlag("permissao_botanica")) {
-	                    System.out.println("\nGine: 'Já falamos sobre isso, lembra? Você vai entregar minhas plantas pra ele.'");
-	                    break;
-	                }
 	                
 	                System.out.println("\nGine: 'Pessoalmente? Não, só trabalho profissionalmente. Ele compra plantas para seus laboratórios.'");
 	                System.out.println("\nEla fornece plantas para Mark? Isso pode ser útil...");
@@ -382,6 +564,12 @@ public class Dialogo {
 	                escolha = scanner.nextLine();
 	                switch(escolha) {
 	                    case "1":
+	                    	
+	                    	if (Estados.getFlag("permissao_botanica")) {
+	    	                    System.out.println("\nGine: 'Já falamos sobre isso, lembra? Você vai entregar minhas plantas pra ele.'");
+	    	                    break;
+	    	                }
+	                    	
 	                        if (Utils.rollPersuasao(Player.get().getPersuasao())) {
 	                            System.out.println("\n[SUCESSO] Gine: 'Sério? Não se incomodaria? Detesto ir àquele lugar branco e estéril... "
 	                                    + "\nPrefiro ficar aqui com minhas plantas.'");
@@ -392,6 +580,7 @@ public class Dialogo {
 	                        break;
 	                        
 	                    case "2":
+	                    	
 	                        System.out.println("\nVocê decide não se arriscar");
 	                        break;
 	                        
@@ -412,14 +601,216 @@ public class Dialogo {
 
 	    System.out.println("\nAo sair, Gine corre atrás de você:");
 	    System.out.println("\nGine: 'Espere! Se descobrir algo sobre plantas ou a doença... me avise? Quero ajudar essas pessoas.'");
-	    System.out.println("\n(Você concorda, deixando-a esperançosa. Seu braço mecânico mostra que ela já foi uma delas.)");
+	    System.out.println("\nVocê concorda, deixando-a esperançosa. Seu braço mecânico mostra que ela já foi uma delas.");
 	}
 	
 	
 	
-	/////////******************************///////////////////////
+	public static void dialogoElevador() {
+		System.out.println("\nVoce se aproxima do elevador");
+		if (!Estados.getFlag("permissao_botanica")) {
+			System.out.println("Um segurança aparece, e o questiona.");
+			System.out.println("\n'Voce não possui uma permissao. Saia imediatamente.'");
+			System.out.println("\n1 -> 'Eu tenho permissão sim, mas eu esqueci minha credencial...' [Persuasão]");
+	        System.out.println("2 -> Atordoar o segurança. [Atletismo]");
+	        System.out.println("3 -> Voltar.");
+	        
+	        String escolha = scanner.nextLine();
+	        switch(escolha) {
+	            case "1": 
+	                if (Utils.rollPersuasao(Player.get().getPersuasao())) {
+	                    System.out.println("\n[SUCESSO] Você mostra um papel qualquer com confiança."
+	                        + "\nSEGURANÇA: 'Hmm... tudo bem, pode passar. Nunca vi esse rosto antes...'");
+	                    Estados.setFlag("elevador_acesso", true);
+	                } else {
+	                    System.out.println("\n[FALHA] Segurança: 'Isso é claramente falso. So saia daqui e não me encha a paciencia.'");
+	                }
+	                break;
+	                
+	            case "2": 
+	                if (Utils.rollAtletismo(Player.get().getAtk())) {
+	                    System.out.println("\n[SUCESSO] Você atordoa o segurança com um golpe preciso."
+	                        + "\nVoce esconde seu corpo adormecido em um canto.");
+	                    Estados.setFlag("elevador_acesso", true);
+	                } else {
+	                    System.out.println("\n[FALHA] O segurança desvia e te imobiliza!"
+	                        + "\nSEGURANÇA: 'Patético. Vá embora daqui, seu rufião!'");
+	                }
+	                break;
+	                
+	            case "3":
+	            	System.out.println("\nVocê recua calmamente. Melhor não arriscar.");
+	            	break;
+	            	
+	            default:
+	            	System.out.println("\nOpção inválida!");
+	        	}
+	        
+			} else {
+			System.out.println("\n'Ouvi que a Gina não pode entregar as flores hoje.'"
+	            + "\nSegurança: Ele acena com a cabeça. 'Pode passar, entregador.'");
+				}
+		
+	}
+	
+	public static void dialogoEscritorio() {
+		
+		System.out.println("\nO escritorio tem uma porta de carvalho escuro talhado nos mais perfeitos detalhes.");
+		
+		if (!Estados.getDocumentos_markOk()) {
+		System.out.println("\nVocê entra finalmente no escritório dele, é um local com baixa segurança levando em consideração o lado de fora. "
+				+ "\nVocê começa a vasculhar seus pertences, sua escrivaninha, seus livros, até mesmo sua coleção de vinhos caros, "
+				+ "\naté que você acha escondido embaixo do piso de madeira uma pilha de documentos. Clássico. "
+				+ "\nOs documentos são variados, desde inimigos corporativos, escândalos políticos, mas seu foco aqui é no próprio Mark e na doença. "
+				+ "\nNovamente, você precisa ser rápido.");
+		}
+	}
+	
+	public static void documentos_mark() {
+	    System.out.println("\nVocê encontra documentos confidenciais sobre Mark Alighieri:");
+	    
+
+	    Map<Integer, String> topicos = new LinkedHashMap<>();
+	    topicos.put(1, "- Mark");
+	    topicos.put(2, "- Família");
+	    topicos.put(3, "- Doença");
+	    topicos.put(4, "- Empresa");
+	    topicos.put(5, "- Arasaka");
+	    
+	    List<Integer> topicosDisponiveis = new ArrayList<>(topicos.keySet());
+	    Collections.shuffle(topicosDisponiveis);
+	    topicosDisponiveis = topicosDisponiveis.subList(0, 3);
+	    
+
+	    topicosDisponiveis.add(6); 
+	    
+	    String escolha = "";
+	    int escolhasFeitas = 0;
+	    boolean readAll = false;
+	    
+	    while (escolhasFeitas < 3 && !escolha.equals("0")) {
+	        System.out.println("\nEscolha um tópico (ou 0 para sair):");
+	        
+	        // Show available topics
+	        for (Integer topicId : topicosDisponiveis) {
+	            if (topicId == 6) {
+	                System.out.println("6 -> Arrisque uma leitura rápida [Lógica]");
+	            } else {
+	                System.out.println(topicId + " -> " + topicos.get(topicId));
+	            }
+	        }
+	        
+	        escolha = scanner.nextLine();
+	        
+	        switch(escolha) {
+	            case "1":
+	                System.out.println("\nMark Alighieri: Considerado o pai da medicina moderna. Dono de um conglomerado farmacêutico."
+	                    + "\nPoucas aparições públicas revelam um homem apático às condições do mundo.");
+	                topicosDisponiveis.remove(Integer.valueOf(1));
+	                escolhasFeitas++;
+	                break;
+	                
+	            case "2":
+	                System.out.println("\nFamília:"
+	                    + "\n- Amanda Alighieri: Esposa e braço direito, mais empática"
+	                    + "\n- Michelle Alighieri: Filha mais velha, abordagem propagandista"
+	                    + "\n- Julia Alighieri: Filha mais nova, isolada por problemas de saúde");
+	                topicosDisponiveis.remove(Integer.valueOf(2));
+	                escolhasFeitas++;
+	                break;
+	                
+	            case "3":
+	                System.out.println("\nDoença (Febre da Engrenagem/Peste Cardíaca):"
+	                    + "\nFase 1: Fadiga, olhos vermelhos, suor metálico"
+	                    + "\nFase 2: Manchas acinzentadas, dores articulares"
+	                    + "\nFase 3: Aceleração cardíaca, colapso neurológico, morte");
+	                topicosDisponiveis.remove(Integer.valueOf(3));
+	                escolhasFeitas++;
+	                break;
+	                
+	            case "4":
+	                System.out.println("\nEmpresa:"
+	                    + "\nIniciou com valores solidários, mas tornou-se gananciosa"
+	                    + "\nCria soluções temporárias para problemas industriais"
+	                    + "\nSuspeita de criar problemas para vender soluções");
+	                topicosDisponiveis.remove(Integer.valueOf(4));
+	                escolhasFeitas++;
+	                break;
+	                
+	            case "5":
+	                System.out.println("\nArasaka:"
+	                    + "\nRival simbiótico - maltrata funcionários que depois usam remédios Alighieri"
+	                    + "\nChefe da família recentemente ausente"
+	                    + "\nPossível conluio sombrio entre as corporações");
+	                topicosDisponiveis.remove(Integer.valueOf(5));
+	                escolhasFeitas++;
+	                break;
+	                
+	            case "6":
+	                if (Utils.rollLogica(Player.get().getLogica())) {
+	                    System.out.println("\n[SUCESSO] Você rapidamente escaneia todos os documentos!");
+	                    readAll = true;
+	                    escolhasFeitas = 3; 
+	                } else {
+	                    System.out.println("\n[FALHA] Não há tempo suficiente para ler tudo cuidadosamente!");
+	                    topicosDisponiveis.remove(Integer.valueOf(6)); 
+	                }
+	                break;
+	                
+	            case "0":
+	                System.out.println("\nVocê decide sair antes de ser pego...");
+	                break;
+	                
+	            default:
+	                System.out.println("\nTópico inválido!");
+	        }
+	    }
+	    
+	    System.out.println("\nO tempo acabou. Você deve sair antes que os guardas cheguem.");
+	    if (readAll) {
+	        System.out.println("\n(Você conseguiu absorver todas as informações importantes)");
+	    } else {
+	        System.out.println("\n(Você só conseguiu partes da informação)");
+	    }
+	    
+	    System.out.println("\nVocê deixa uma moeda de despedida na mesa - um convite indireto para Mark."
+	        + "\nAmanhã, você o confrontará pessoalmente...");
+	    
+	    System.out.println("\nVoce deveria volar para o apartamento.");
+	    
+	    Estados.setFlag("documentos_markOk",true);
+	}
 	
 	
+	
+	public static void dialogoMaxAndar() {
+		System.out.println("\nO piso e as paredes estão cobertas em mármore e há peças de arte em estantes.");
+	}
+	
+	public static void dialogoEscadas() {
+		System.out.println("\nAs escadas de emergencia se estendem alto ate onde o breu consome toda a luz.");
+	}
+	
+	public static void dialogoCorredores() {
+		System.out.println("\nOs corredores se encontram cheios de caixas, jogadas ao aleatorio em sua extensão.");
+	}
+	
+	public static void observar_fundos() {
+		System.out.println("Surpreendentemente, não há nenhum seguraça. A porta parece estar destrancada.");
+	}
+	
+	public static void observarArmazem() {
+		System.out.println("\nÉ um armazem um tanto quanto cheio. Voce consegue identificar diferentes substancias nos rotulos das caixas.");
+	}
+	
+	public static void observar_corredores() {
+		System.out.println("\nOs corredores estão escuros e extintos de qualquer forma de vida.");
+	}
+	
+	
+	public static void observar_labAtrio() {
+		System.out.println("\nOs funcionarios estão apressados e com rostos serios.");
+	}
 	
 	public static void observar_parque() {
 		

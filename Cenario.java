@@ -151,14 +151,102 @@ public class Cenario {
 		//Laboratorio
 		
 		Map<String,String> opcoesLab = new LinkedHashMap<>();
-		opcoesLab.put("Entrada", "Entrada Principal");
-		opcoesLab.put("Fundos", "Fundos");
-		opcoesLab.put("Armazem","Armazem");
+		opcoesLab.put("Voltar", "Parque");
+		
+		if (Estados.getFlag("dialogoLouca_1")) {
+			opcoesLab.put("Entrada", "Entrada");
+			opcoesLab.put("Fundos", "Fundos");
+			opcoesLab.put("Armazem","Armazem");
+		}
 		
 		
 		Cenario lab = new Cenario("Voce está no laboratório.", opcoesLab,"dialogoLab");
 			
 		cenarios.put("Laboratorio", lab);
+		
+		//Entrada Principal LAb
+		
+		Map<String,String> opcoesLabEntrPrincipal = new LinkedHashMap<>();
+		opcoesLabEntrPrincipal.put("Voltar", "Laboratorio");
+		opcoesLabEntrPrincipal.put("Elevador", "Elevador");
+		opcoesLabEntrPrincipal.put("Observar", "#observar_labAtrio");
+		
+		Cenario labEntradaPrincipal = new Cenario("Voce está no Átrio do laboratório.", opcoesLabEntrPrincipal,"dialogoLabPrincipal");
+			
+		cenarios.put("Entrada", labEntradaPrincipal);
+		
+		//Elevador lab
+		
+		Map<String,String> opcoesElevadorLab = new LinkedHashMap<>();
+		opcoesElevadorLab.put("Voltar", "Laboratorio");
+		opcoesElevadorLab.put("Subir","Andar Max");
+		
+		Cenario labElevador = new Cenario("Voce está no Elevador.", opcoesElevadorLab,"dialogoElevador");
+			
+		cenarios.put("Elevador", labElevador);
+		
+		//Fundos lab
+		
+		Map<String,String> opcoesLabFundos = new LinkedHashMap<>();
+		opcoesLabFundos.put("Voltar", "Laboratorio");
+		opcoesLabFundos.put("Invadir", "Escadas");
+		opcoesLabFundos.put("Observar", "#observar_fundos");
+		
+		Cenario labFundos = new Cenario("Voce está nos fundos do laboratorio.", opcoesLabFundos,"dialogoLabFundos");
+			
+		cenarios.put("Fundos", labFundos);
+		
+		//Escads lab
+		
+		Map<String,String> opcoesEscadasLab = new LinkedHashMap<>();
+		opcoesEscadasLab.put("Voltar", "Fundos");
+		opcoesEscadasLab.put("Subir", "Andar Max");
+		
+		Cenario labEscadas = new Cenario("Voce está nas escadas.", opcoesEscadasLab,"dialogoEscadas");
+			
+		cenarios.put("Escadas", labEscadas);
+		
+		//Armazem lab
+		
+		Map<String,String> opcoesLabArmazem = new LinkedHashMap<>();
+		opcoesLabArmazem.put("Voltar", "Laboratorio");
+		opcoesLabArmazem.put("Porta", "Corredores");
+		opcoesLabArmazem.put("Observar", "#observarArmazem");
+		
+		Cenario labArmazem = new Cenario("Voce está no armazem laboratório.", opcoesLabArmazem,"dialogoLabArmazem");
+			
+		cenarios.put("Armazem", labArmazem);
+		
+		//Corredores
+		
+		Map<String,String> opcoesCorredores = new LinkedHashMap<>();
+		opcoesCorredores.put("Voltar", "Armazem");
+		opcoesCorredores.put("Escadas", "Andar Max");
+		opcoesCorredores.put("Observar", "#observar_corredores");
+		
+		Cenario labCorredores = new Cenario("Voce está nos corredores.", opcoesCorredores,"dialogoCorredores");
+			
+		cenarios.put("Corredores", labCorredores);
+		
+		//Andar max
+		
+		Map<String,String> opcoesMax = new LinkedHashMap<>();
+		opcoesMax.put("Sair", "Entrada");
+		opcoesMax.put("Escritorio", "Escritorio");
+		
+		Cenario labMax = new Cenario("Voce está no andar mais alto do prédio.", opcoesMax,"dialogoMaxAndar");
+			
+		cenarios.put("Andar Max", labMax);
+		
+		//Escritorio alighieri
+		
+		Map<String,String> opcoesEscritorio = new LinkedHashMap<>();
+		opcoesEscritorio.put("Voltar", "Andar Max");
+		opcoesEscritorio.put("Analisar documentos", "#documentos_mark");
+		
+		Cenario labEscritorio = new Cenario("Voce está no escritório de Alighieri.", opcoesEscritorio,"dialogoEscritorio");
+			
+		cenarios.put("Escritorio", labEscritorio);
 		
 	}
 	
@@ -180,6 +268,23 @@ public class Cenario {
 	        }
 
 	        parque.updtOpcoes(newOpcao); 
+	    }
+	}
+	
+	public static void updtLabOpcoes() {
+	    Cenario lab = Cenario.cenarios.get("Laboratorio");
+	    if (lab != null) {
+	        Map<String, String> newOpcao = new LinkedHashMap<>();
+	        newOpcao.put("Voltar", "Parque");
+
+
+	        if (Estados.getFlag("dialogoLouca_1")) {
+	        	newOpcao.put("Entrada", "Entrada");
+				newOpcao.put("Fundos", "Fundos");
+				newOpcao.put("Armazem","Armazem");
+	        }
+
+	        lab.updtOpcoes(newOpcao); 
 	    }
 	}
 	
