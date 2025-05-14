@@ -171,6 +171,10 @@ public class Cenario {
 		opcoesLabEntrPrincipal.put("Elevador", "Elevador");
 		opcoesLabEntrPrincipal.put("Observar", "#observar_labAtrio");
 		
+		if (Estados.getFlag("dialogoLuaCap2Apt_mostrado")) {
+            opcoesLabEntrPrincipal.put("Confrontar", "#confrontoMark");
+        }
+		
 		Cenario labEntradaPrincipal = new Cenario("Voce está no Átrio do laboratório.", opcoesLabEntrPrincipal,"dialogoLabPrincipal");
 			
 		cenarios.put("Entrada", labEntradaPrincipal);
@@ -283,8 +287,35 @@ public class Cenario {
 				newOpcao.put("Fundos", "Fundos");
 				newOpcao.put("Armazem","Armazem");
 	        }
+	        
+	        if (Estados.getFlag("confrontoMark_feito")) {
+	            newOpcao.remove("Fundos");
+	            newOpcao.remove("Armazem");
+	        }
 
 	        lab.updtOpcoes(newOpcao); 
+	    }
+	}
+	
+	public static void updtLabEntradaOpcoes() {
+	    Cenario labEntradaPrincipal = Cenario.cenarios.get("Entrada");
+	    if (labEntradaPrincipal != null) {
+	        Map<String, String> newOpcao = new LinkedHashMap<>();
+	        newOpcao.put("Voltar", "Laboratorio");
+	        newOpcao.put("Elevador", "Elevador");
+			newOpcao.put("Observar", "#observar_labAtrio");
+
+	        if (Estados.getFlag("dialogoLuaCap2Apt_mostrado")) {
+	        	newOpcao.put("Confrontar", "#confrontoMark");
+	        }
+	        
+	        if (Estados.getFlag("confrontoMark_feito")) {
+	        	newOpcao.remove("Elevador");
+	        	newOpcao.remove("Confrontar");
+	        	
+	        }
+
+	        labEntradaPrincipal.updtOpcoes(newOpcao); 
 	    }
 	}
 	

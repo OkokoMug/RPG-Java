@@ -321,6 +321,271 @@ public class Dialogo {
 	    Estados.setFlag("dialogoLuaCap2Apt_mostrado", true);
 	}
 	
+	//Dialogo confronto mark
+	public static void confrontoMark() {
+
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+
+
+		System.out.println("\nVocê está no átrio do laboratório. Sua visita era mais do que esperada.");
+		System.out.println("Os guardas permitem sua entrada e o seguem logo atrás de você.");
+		System.out.println("Finalmente você adentra no escritório do senhor Mark Alighieri. O confronto será agora.\n");
+
+		System.out.println("Você está de frente a frente com o senhor Mark. Ele não está usando sua máscara,");
+		System.out.println("então você também retira a sua em sinal de respeito e vocês dois finalmente se olham cara a cara.\n");
+
+		System.out.println("Mark aparenta sinais de velhice no rosto, cabelo grisalho mas sem sinais de calvície,");
+		System.out.println("seu rosto velho não demonstra cansaço e seu olhar parece julgar cada movimento seu.");
+		System.out.println("Ele usa um terno social sob medida e seu corpo não parece demonstrar sinais de fraqueza.\n");
+
+		System.out.println("Mark: 'Sabe, achei curioso quando encontrei esta moeda na minha mesa.'");
+		System.out.println("'Tenho diversas na minha conta, mas essa em particular me chamou a atenção,'");
+		System.out.println("'principalmente quando descubro que tenho um invasor.'");
+		System.out.println("'Me diga, " + Player.get().getNome() + ", o que você procura chamando minha atenção?'");
+		System.out.println("'Espero que seja um bom motivo.'\n");
+
+		System.out.println("Ele sabe seu nome sem nem mesmo você falar para ele. Ele fez seu dever de casa.");
+		System.out.println("As escolhas de palavras devem ser feitas com sabedoria. Ele parece complacente agora,");
+		System.out.println("mas não por muito tempo.");
+
+		String escolha = "";
+		while (!escolha.equals("4")) {
+		    System.out.println("\n1 -> 'Perdoe-me pela invasão, estou aqui para investigar a doença'");
+		    System.out.println("2 -> 'Gostaria de falar um pouco sobre a Arasaka...'");
+		    System.out.println("3 -> 'Gostaria de falar um pouco sobre a Doença em si...'");
+		    System.out.println("4 -> 'Continuar'");
+		    
+		    escolha = scanner.nextLine();
+		    
+		    switch (escolha) {
+		        case "1":
+		            InvestigacaoOpcoes();
+		            break;
+		        case "2":
+		            ArasakaOpcoes();
+		            break;
+		        case "3":
+		            DoencaOpcoes();
+		            break;
+		        case "4":
+		            System.out.println("\nVocê decide mudar de abordagem...");
+		            break;
+		        default:
+		            System.out.println("Digite uma escolha válida...");
+		    }
+		}
+
+		System.out.println("\nVocê pega sua máscara e antes de sair do escritório, você ouve Mark falando:");
+		System.out.println("MARK: 'Detetive, por favor, aceite isso como um gesto amigável.'");
+		System.out.println("Uma maçã. Uma política da empresa entregar maçãs para visitantes e funcionários.");
+
+		Estados.setFlag("confrontoMark_feito", true);
+
+		}
+
+		private static void InvestigacaoOpcoes() {
+		System.out.println("\nMARK: 'E você veio investigar onde esteve o primeiro relato.'");
+		System.out.println("'De fato foi nessas instalações, sou suspeito de ser culpado, detetive?'");
+
+
+		System.out.println("\n1 -> 'Sim, você é.'");
+		System.out.println("2 -> 'Não, você não é.'");
+		System.out.println("3 -> 'Ainda é cedo demais para julgar.'");
+
+		String escolha = scanner.nextLine();
+		switch (escolha) {
+		    case "1":
+		        System.out.println("\nEle ri para sua resposta antes de responder.");
+		        System.out.println("MARK: 'Pelo menos é sincero.'");
+		        break;
+		    case "2":
+		        System.out.println("\nEle parece surpreso com sua resposta, mas rapidamente retoma a compostura.");
+		        System.out.println("MARK: 'Fico feliz que saiba reconhecer um homem inocente quando vê um.'");
+		        break;
+		    case "3":
+		        System.out.println("\nSua resposta parece ter desagradado ele.");
+		        System.out.println("MARK: 'Indeciso, detetive? Ou apenas com medo de ser sincero comigo?'");
+		        break;
+		    default:
+		        System.out.println("Faça uma escolha válida...");
+		}
+		
+
+		}
+
+		public static void ArasakaOpcoes() {
+		System.out.println("\nMARK: 'Ah, deixa eu imaginar, seu segundo suspeito? Terei o prazer de queimar a reputação deles.'");
+		System.out.println("Um sorriso sádico aparece no rosto dele.");
+
+		System.out.println("\n1 -> 'O que você sabe do chefe da família Arasaka?'");
+		System.out.println("2 -> 'Acha que a doença foi, de alguma forma, causada por eles?'");
+
+		String escolha = scanner.nextLine();
+		switch (escolha) {
+		    case "1":
+		        System.out.println("\nMARK: 'Não sei mais do que você sabe, mas acho estranho seu repentino sumiço");
+		        System.out.println("após o aparecimento da doença. Uma coincidência, não?'");
+		        System.out.println("Ele não estava brincando quando disse que queria difamá-los.");
+		        break;
+		    case "2":
+		        System.out.println("\nMARK: 'É óbvio, não me surpreenda que uma doença desconhecida nasça");
+		        System.out.println("naquelas condições insalubres. Aqui temos equipamento adequado para lidar com tudo.'");
+		        System.out.println("Sujo falando do mal lavado...");
+		        break;
+		    default:
+		        System.out.println("Faça uma escolha válida...");
+		}
+
+		}
+
+		public static void DoencaOpcoes() {
+		System.out.println("\nMARK: 'Ah, claro, o tópico mais importante e o motivo da sua presença.'");
+		System.out.println("'Por que deveria respondê-lo? Não sei qual a origem da doença,'");
+		System.out.println("'mas se tivesse origem aqui seria um problema para minha imagem.'");
+		System.out.println("'Por que deveria colaborar, detetive?'");
+
+		System.out.println("\nEle não está completamente contra compartilhar informações,");
+		System.out.println("apenas está testando você. Escolher a resposta certa é crucial.");
+
+		String escolha = "";
+		while (!escolha.equals("4")) {
+		    System.out.println("\n1 -> Ajudar as pessoas");
+		    System.out.println("2 -> Queimar a família Arasaka");
+		    System.out.println("3 -> Mencione a família dele e o risco");
+		    System.out.println("4 -> Continuar");
+		    
+		    escolha = scanner.nextLine();
+		    
+		    switch (escolha) {
+		        case "1":
+		            if (!Estados.getFlag("escolha_alig_Ajudar")) {
+		                Estados.setFlag("escolha_alig_Ajudar", true);
+		                System.out.println("\nMARK: 'Não somos uma instituição de caridade, detetive.'");
+		            } else {
+		                System.out.println("Ele menospreza sua resposta. Você não conseguirá nada sobre a doença assim.");
+		            }
+		            break;
+		        case "2":
+		            if (!Estados.getFlag("escolha_alig_Queimar")) {
+		                Estados.setFlag("escolha_alig_Queimar", true);
+		                System.out.println("\nMARK: 'De fato é interessante sua ideia, mas...'");
+		                System.out.println("'Isso não torna toda a investigação sem sentido?'");
+		                System.out.println("'Ou pretendia me fazer de tolo?'");
+		            } else {
+		                System.out.println("Você parece ter ofendido ele. Não foi a resposta mais inteligente.");
+		            }
+		            break;
+		        case "3":
+		            FamiliaApelo();
+		            break;
+		        case "4":
+		            break;
+		        default:
+		            System.out.println("Faça uma escolha válida.");
+		    }
+		}
+
+		}
+
+		public static void FamiliaApelo() {
+		if (!Estados.getFlag("escolha_alig_Familia")) {
+		Estados.setFlag("escolha_alig_Familia", true);
+		System.out.println("\nMark fica com expressão séria ao mencionar a família.");
+		System.out.println("MARK: 'Continue, detetive, mas meça suas palavras com cuidado.'");
+		System.out.println("\nVocê deve apelar para sua filha doente, mas... qual era o nome dela?");
+
+		    System.out.println("\n1 -> Amanda");
+		    System.out.println("2 -> Michele");
+		    System.out.println("3 -> Julia");
+		    System.out.println("4 -> Apele para a família toda [Persuasão]");
+		    
+		    String escolha = scanner.nextLine();
+		    switch (escolha) {
+		        case "1":
+		            System.out.println("\nMARK: 'Minha esposa está segura em casa longe dessa infecção.'");
+		            System.out.println("'Por favor, detetive, se retire antes que eu o faça.'");
+		            break;
+		        case "2":
+		            System.out.println("\nMARK: 'Minha filha e sucessora está mais do que ciente.'");
+		            System.out.println("'Ela é jovem e saudável, essa doença não chegará nela.'");
+		            break;
+		        case "3":
+		            System.out.println("\nMARK: 'Você!..'");
+		            System.out.println("\nEle se levanta em revolta pela menção de sua filha doente.");
+		            System.out.println("Ele se senta novamente, com raiva visível em seu olhar.");
+		            System.out.println("MARK: 'Você sabe que ela é a mais vulnerável.'");
+		            System.out.println("'Seja racional e me ajude na investigação.'");
+		            System.out.println("\nEle dá uma pausa antes de continuar:");
+		            System.out.println("MARK: 'Pergunte o que quiser.'");
+		            perguntas_mark_sucesso();
+		            break;
+		        case "4":
+		            if (!Estados.getFlag("mark_apelaFamilia")) {
+		                Estados.setFlag("mark_apelaFamilia", true);
+		                if (Utils.rollPersuasao(Player.get().getPersuasao())) {
+		                    System.out.println("\n[SUCESSO] MARK parece ter sido atingido por suas palavras.");
+		                    System.out.println("MARK: 'Prossiga com suas perguntas, detetive.'");
+		                    
+		                    perguntas_mark_sucesso();
+		                } else {
+		                    System.out.println("\n[FALHA] MARK ri da sua tentativa de convencê-lo.");
+		                    System.out.println("MARK: 'O problema dos proletários não chegará nas castas mais altas.'");
+		                    System.out.println("'Agora pare de desperdiçar meu tempo.'");
+		                }
+		            } else {
+		                System.out.println("\nEle parece ter visto você como um inútil.");
+		                System.out.println("Você não conseguirá mais nada dele e resolve ir embora.");
+		            }
+		            break;
+		        default:
+		            System.out.println("Faça uma escolha válida.");
+		    }
+		}
+
+
+		}
+		
+		public static void perguntas_mark_sucesso() {
+	        System.out.println("\n1 -> 'Qual a origem da doença?'");
+	        System.out.println("2 -> 'O que fez quando descobriu a doença?'");
+	        System.out.println("3 -> 'Por que o nome “Febre da engrenagem” e “peste cardíaca”?'");
+	        System.out.println("4 -> 'Acha que a origem possa ter sido no laboratório?'");
+	        System.out.println("5 -> 'Como foi o contágio?'");
+	        System.out.println("6 -> Sair");
+
+	        String escolha = "";
+	        while (!escolha.equals("6")) {
+	            escolha = scanner.nextLine();
+	            switch(escolha) {
+	                case "1":
+	                    System.out.println("\nMark: 'Como dito anteriormente, não sabemos e nem temos ideia. A doença só apareceu do nada e matou diversos dos meus homens.'");
+	                    break;
+	                case "2":
+	                    System.out.println("\nMark: 'Tentamos isolar os infectados para estudo, mas já era tarde demais e saiu do controle. Priorizamos manter os nossos acima de tudo.'");
+	                    break;
+	                case "3":
+	                    System.out.println("\nMark: '“Peste cardíaca” porque o último estágio é marcado por aceleração do coração, que já declara a morte do infectado."
+	                            + "\n“Febre da engrenagem” é o nome popular, pois o coração se torna semelhante a um pistão instável.'");
+	                    break;
+	                case "4":
+	                    System.out.println("\nMark: 'Sou suspeito para dizer, detetive, mas diria que é improvável. Principalmente uma infecção dessa escala — teríamos notado nos seus estágios iniciais.'");
+	                    break;
+	                case "5":
+	                    System.out.println("\nMark: 'Foi… curioso, no mínimo. Mesmo isolando os infectados, começaram a aparecer casos em meio às ruas e, de repente, estava fora de controle."
+	                            + "\nÉ difícil dizer como funciona a transmissão.'");
+	                    break;
+	                case "6":
+	                    System.out.println("\nVocê encerrou a conversa com Mark.");
+	                    break;
+	                default:
+	                    System.out.println("\nFaça uma escolha válida.");
+	            	}
+	            }
+	        
+	        }
+
+	
 	public static void dialogoCliente_IntroHotel() {
 		System.out.println("\nVocê ouve seu telefone tocar e o atende, é O Cliente.");
 		System.out.println("\nO Cliente: '" + Player.get().getNome()+", você finalmente chegou no seu apartamento? Gostaria de te entregar condições melhores, "

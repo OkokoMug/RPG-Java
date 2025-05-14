@@ -21,6 +21,11 @@ public class Estados {
         flags.put("conheceu_Lua", false);
         flags.put("cap2_inicio", false);
         flags.put("dialogoLuaCap2Apt_mostrado", false);
+        flags.put("confrontoMark_feito", false);
+        flags.put("escolha_alig_Ajudar", false);
+        flags.put("escolha_alig_Queimar", false);
+        flags.put("escolha_alig_Familia", false);
+        flags.put("mark_apelaFamilia", false);
         
     }
     
